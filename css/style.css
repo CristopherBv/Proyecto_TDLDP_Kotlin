@@ -12,6 +12,10 @@
     --font-code: 'JetBrains Mono', monospace;
 }
 
+.imagenRedondeada {
+    border-radius: 15px; /* Ajusta el valor para más o menos redondeo */
+}
+
 * {
     margin: 0;
     padding: 0;
