@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kotlin | Engineering Vision</title>
+    <title>Kotlin | Proyecto de Lenguajes</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -36,8 +36,8 @@
                     <span>El estándar</span>
                     <span>del futuro.</span>
                 </h2>
-                <p>Un lenguaje de programación pragmático que combina paradigmas orientados a objetos y funcionales. [AQUÍ PONGAN UNA BREVE INTRO]</p>
-                <a href="#history" class="btn btn-primary">Explorar Arquitectura</a>
+                <p>Un lenguaje de programación pragmático que combina paradigmas orientados a objetos y funcionales. Diseñado para la interoperabilidad total.</p>
+                <a href="#history" class="btn btn-primary">Explorar Lenguaje</a>
             </div>
             <div class="hero-visual tilt-card">
                 <img src="assets/kotlinLogo.png" alt="Logo oficial de Kotlin" style="width: 100%; max-width: 350px; display: block; margin: 0 auto; filter: drop-shadow(0 10px 30px rgba(127, 82, 255, 0.5));">
@@ -48,27 +48,44 @@
     <section id="history" class="section-padding">
         <div class="container">
             <div class="section-header reveal">
-                <h3>Génesis y Evolución</h3>
-                <p>Conoce los orígenes y la arquitectura base del lenguaje.</p>
+                <h3>Historia del Lenguaje</h3>
+                <p>Orígenes, paradigma y evolución en la industria.</p>
             </div>
 
-            <div class="bento-grid">
-                <div class="bento-card tilt-card reveal delay-1">
+            <div class="bento-asym">
+
+                <div class="glow-card reveal delay-1 span-col-2">
                     <h4>Creadores y Origen</h4>
                     <p>[PLACEHOLDER: Escriban aquí sobre JetBrains, el año de creación y la justificación de por qué se creó para mejorar Java]</p>
                 </div>
-                <div class="bento-card tilt-card reveal delay-2 span-2">
+
+                <div class="reveal delay-2">
+                    <div class="image-placeholder">
+                        <span>[FOTO_JETBRAINS]</span>
+                    </div>
+                </div>
+
+                <div class="reveal delay-3 span-row-2">
+                    <div class="image-placeholder">
+                        <span>[FOTO_MASCOTA]</span>
+                    </div>
+                </div>
+
+                <div class="glow-card reveal delay-4 span-col-3">
                     <h4>Paradigma y Compilación</h4>
                     <p>[PLACEHOLDER: Expliquen que es multiparadigma (OO y Funcional) y su método de implementación (Compilador a Bytecode de la JVM, Kotlin/Native, Kotlin/JS)]</p>
                 </div>
-                <div class="bento-card tilt-card reveal delay-3 span-2">
+
+                <div class="glow-card reveal delay-1 span-col-2">
                     <h4>Ventajas vs Desventajas</h4>
                     <p>[PLACEHOLDER: Compárenlo con Java. Ej. Ventaja: Null Safety, Concisión. Desventaja: Tiempo de compilación inicial, curva de aprendizaje si vienes de lenguajes dinámicos.]</p>
                 </div>
-                <div class="bento-card tilt-card reveal delay-4">
+
+                <div class="glow-card reveal delay-2 span-col-2">
                     <h4>Áreas de Aplicación</h4>
                     <p>[PLACEHOLDER: Mencionen Android Development oficial, Backend con Spring Boot, y KMP (Kotlin Multiplatform)]</p>
                 </div>
+
             </div>
         </div>
     </section>
@@ -80,7 +97,7 @@
                 <p>Identificadores, Tipos de Datos y Declaraciones.</p>
             </div>
 
-            <div class="ide-container reveal">
+            <div class="ide-container reveal delay-1">
                 <div class="ide-sidebar">
                     <button class="tab-btn active" data-target="identificadores">Identificadores</button>
                     <button class="tab-btn" data-target="primitivos">Tipos Primitivos</button>
@@ -98,14 +115,14 @@
 
                     <div id="primitivos" class="tab-pane">
                         <h4>Tipos de Datos "Primitivos"</h4>
-                        <p>[PLACEHOLDER: Expliquen que en Kotlin todo es un objeto, pero en tiempo de ejecución se optimizan a primitivos de Java (Int, Double, Boolean, Char)]</p>
+                        <p>[PLACEHOLDER: Expliquen que en Kotlin todo es un objeto, pero en tiempo de ejecución se optimizan a primitivos (Int, Double, Boolean, Char)]</p>
                         <pre><code><span class="keyword">val</span> <span class="variable">edad</span>: <span class="type">Int</span> = <span class="number">20</span>
 <span class="keyword">val</span> <span class="variable">pi</span>: <span class="type">Double</span> = <span class="number">3.14159</span>
 <span class="keyword">val</span> <span class="variable">esActivo</span>: <span class="type">Boolean</span> = <span class="keyword">true</span></code></pre>
                     </div>
 
                     <div id="declaracion" class="tab-pane">
-                        <h4>Declaración: val vs var</h4>
+                        <h4>Asignación y Declaración</h4>
                         <p>[PLACEHOLDER: Detallen la diferencia entre Inferencia de tipos, Inmutabilidad (val) y Mutabilidad (var)]</p>
                         <pre><code><span class="comment">// Variable inmutable (Constante)</span>
 <span class="keyword">val</span> <span class="variable">universidad</span> = <span class="string">"UADY"</span>

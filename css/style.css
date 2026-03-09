@@ -66,7 +66,7 @@ body {
     100% { transform: translate(10vw, 10vh) scale(1.2); }
 }
 
-/* --- Navbar Glassmorphism --- */
+/* --- Navbar --- */
 header {
     position: fixed;
     top: 0;
@@ -170,61 +170,107 @@ header {
     box-shadow: 0 6px 25px rgba(127, 82, 255, 0.6);
 }
 
-.glass-placeholder {
-    width: 100%;
-    aspect-ratio: 1/1;
-    background: var(--surface);
-    border: 1px solid var(--surface-border);
-    border-radius: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 2rem;
-    color: var(--text-muted);
-}
-
 /* --- Secciones Generales --- */
 .section-padding { padding: 8rem 0; }
-
 .section-header { margin-bottom: 4rem; }
 .section-header h3 { font-size: 2.5rem; margin-bottom: 0.5rem; }
 .section-header p { color: var(--text-muted); font-size: 1.1rem; }
 
-/* --- Bento Grid & 3D Cards --- */
-.bento-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+/* --- Animaciones de Scroll --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
 }
 
-.span-2 { grid-column: span 2; }
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
 
-.bento-card {
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+
+/* --- Grid Asimétrico (Bento Box) --- */
+.bento-asym {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    grid-auto-rows: minmax(250px, auto);
+}
+
+@media (min-width: 900px) {
+    .bento-asym { grid-template-columns: repeat(4, 1fr); }
+    .span-col-2 { grid-column: span 2; }
+    .span-col-3 { grid-column: span 3; }
+    .span-row-2 { grid-row: span 2; }
+}
+
+/* --- Image Placeholders --- */
+.image-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 250px;
+    border-radius: 16px;
+    background: linear-gradient(-45deg, #0b0b0e, #1a1a24, #2a1b4d, #0b0b0e);
+    background-size: 400% 400%;
+    animation: liquidGradient 10s ease infinite;
+    border: 1px solid rgba(127, 82, 255, 0.2);
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.02);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.3);
+    font-family: var(--font-code);
+    font-size: 0.9rem;
+    overflow: hidden;
+    position: relative;
+}
+
+@keyframes liquidGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- Tarjetas con Glow --- */
+.glow-card {
+    position: relative;
     background: var(--surface);
     border: 1px solid var(--surface-border);
     border-radius: 20px;
     padding: 2.5rem;
-    transform-style: preserve-3d; /* Clave para el efecto 3D del JS */
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+    z-index: 1;
 }
 
-.bento-card h4 {
+.glow-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(127, 82, 255, 0.5);
+    box-shadow: 0 20px 40px rgba(127, 82, 255, 0.15);
+    z-index: 10;
+}
+
+.glow-card h4 {
     color: var(--kotlin-purple);
     font-size: 1.3rem;
     margin-bottom: 1rem;
-    transform: translateZ(30px); /* Efecto pop-out en 3D */
 }
 
-.bento-card p {
+.glow-card p {
     color: var(--text-muted);
     line-height: 1.6;
-    transform: translateZ(20px);
 }
 
-/* --- IDE / interactive Tabs --- */
+/* --- IDE / Tabs Interactivos --- */
 .ide-container {
     display: flex;
-    background: #020203; /* Aún más oscuro para el IDE */
+    background: #020203;
     border: 1px solid var(--surface-border);
     border-radius: 16px;
     overflow: hidden;
@@ -274,7 +320,7 @@ header {
 .tab-pane h4 { font-size: 1.5rem; margin-bottom: 1rem; }
 .tab-pane p { color: var(--text-muted); margin-bottom: 1.5rem; }
 
-/* Code Styling (JetBrains Mono) */
+/* Colores de Código */
 pre {
     background: #0f1015;
     padding: 1.5rem;
@@ -285,7 +331,6 @@ pre {
 
 code { font-family: var(--font-code); font-size: 0.95rem; line-height: 1.5; }
 
-/* Syntax Highlighting Colors */
 .keyword { color: var(--kotlin-orange); }
 .variable { color: #9CDCFE; }
 .string { color: #CE9178; }
@@ -297,19 +342,6 @@ code { font-family: var(--font-code); font-size: 0.95rem; line-height: 1.5; }
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
-
-/* --- Scroll Reveal Animations --- */
-.reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.reveal.active { opacity: 1; transform: translateY(0); }
-.delay-1 { transition-delay: 0.1s; }
-.delay-2 { transition-delay: 0.2s; }
-.delay-3 { transition-delay: 0.3s; }
-.delay-4 { transition-delay: 0.4s; }
 
 /* --- Footer --- */
 footer {
@@ -325,8 +357,6 @@ footer h5 { color: var(--text-muted); margin-bottom: 1rem; }
 /* Responsive adjustments */
 @media (max-width: 900px) {
     .hero-grid { grid-template-columns: 1fr; }
-    .bento-grid { grid-template-columns: 1fr; }
-    .span-2 { grid-column: span 1; }
     .ide-container { flex-direction: column; }
     .ide-sidebar, .ide-content { width: 100%; }
     .complex-reveal span { font-size: 3rem; }
