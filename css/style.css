@@ -1,118 +1,282 @@
-/* Reseteo básico para que todos los navegadores lo lean igual */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
-/* Variables de color (inspiradas en Kotlin) */
 :root {
-    --kotlin-purple: #7F52FF;
-    --kotlin-orange: #F58220;
-    --dark-text: #202124;
-    --light-bg: #f8f9fa;
+    --bg-dark: #0f172a;
+    --bg-darker: #020617;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --kotlin-purple: #7f52ff;
+    --kotlin-purple-glow: rgba(127, 82, 255, 0.4);
+    --kotlin-orange: #f58220;
+}
+
+/* Scroll suave al dar clic en el menú */
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    background-color: var(--light-bg);
-    color: var(--dark-text);
-    line-height: 1.6;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    overflow-x: hidden;
 }
 
 .container {
     width: 90%;
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
-/* --- Navegación --- */
+/* --- Navegación Glassmorphism --- */
 header {
-    background-color: white;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    position: sticky;
+    position: fixed;
     top: 0;
+    width: 100%;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(12px); /* Efecto de cristal */
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .nav-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 0;
+    height: 80px;
 }
 
 .logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.logo span {
     color: var(--kotlin-purple);
-    font-size: 1.5rem;
 }
 
 .nav-links {
-    list-style: none;
     display: flex;
-    gap: 1.5rem;
+    gap: 2rem;
+    list-style: none;
 }
 
 .nav-links a {
+    color: var(--text-main);
     text-decoration: none;
-    color: var(--dark-text);
-    font-weight: 500;
-    transition: color 0.3s;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
     color: var(--kotlin-orange);
 }
 
-/* --- Sección Hero (Principal) --- */
+/* --- Hero Section --- */
 .hero {
-    background: linear-gradient(135deg, var(--kotlin-purple), #c711e1);
-    color: white;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding-top: 80px;
+    overflow: hidden;
+}
+
+.hero-content {
     text-align: center;
-    padding: 4rem 0;
-    border-radius: 0 0 20px 20px;
+    z-index: 10;
+    max-width: 800px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(127, 82, 255, 0.1);
+    color: #a78bfa;
+    border: 1px solid rgba(127, 82, 255, 0.2);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .hero h2 {
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.hero h2 span {
+    background: linear-gradient(to right, var(--kotlin-purple), var(--kotlin-orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+}
+
+/* Botones */
+.btn-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.btn {
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: var(--kotlin-purple);
+    color: white;
+    box-shadow: 0 4px 15px var(--kotlin-purple-glow);
+}
+
+.btn-primary:hover {
+    background: #6a3de8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--kotlin-purple-glow);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Decoraciones Flotantes */
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 1;
+    opacity: 0.4;
+    animation: float 10s infinite alternate;
+}
+
+.blob-1 {
+    width: 400px;
+    height: 400px;
+    background: var(--kotlin-purple);
+    top: -100px;
+    left: -100px;
+}
+
+.blob-2 {
+    width: 300px;
+    height: 300px;
+    background: var(--kotlin-orange);
+    bottom: 50px;
+    right: -50px;
+    animation-delay: -5s;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(20px) scale(1.1); }
+}
+
+/* --- Secciones de Contenido --- */
+.content-section {
+    padding: 8rem 0;
+}
+
+.dark-alt {
+    background-color: var(--bg-darker);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header h3 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
 }
 
-.hero p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
+.section-header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
 }
 
-.btn {
-    display: inline-block;
-    background-color: var(--kotlin-orange);
-    color: white;
-    padding: 0.8rem 2rem;
-    text-decoration: none;
-    border-radius: 25px;
-    font-weight: bold;
-    transition: transform 0.2s;
+/* Tarjetas */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
 }
 
-.btn:hover {
-    transform: translateY(-3px);
+.card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 2.5rem;
+    border-radius: 16px;
+    transition: transform 0.3s ease, background 0.3s ease;
 }
 
-/* --- Secciones de contenido --- */
-.content-section {
-    padding: 4rem 0;
+.card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(127, 82, 255, 0.3);
 }
 
-.content-section h3 {
-    color: var(--kotlin-purple);
-    font-size: 2rem;
+.card h4 {
+    font-size: 1.5rem;
     margin-bottom: 1rem;
+    color: var(--kotlin-purple);
 }
 
-/* --- Footer --- */
+.card p {
+    color: var(--text-muted);
+}
+
+.code-card {
+    font-family: 'Courier New', Courier, monospace;
+    background: #000;
+    color: #a78bfa;
+    border-left: 4px solid var(--kotlin-orange);
+}
+
+/* --- CLASES PARA JS (Animaciones al hacer scroll) --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 footer {
     text-align: center;
     padding: 2rem 0;
-    background-color: var(--dark-text);
-    color: white;
-    margin-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
 }

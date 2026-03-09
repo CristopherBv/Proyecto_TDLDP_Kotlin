@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kotlin | Proyecto Teoría de Lenguajes de Programación</title>
+    <title>Kotlin | Experiencia Interactiva</title>
     <link rel="stylesheet" href="css/style.css">
+    <script defer src="js/main.js"></script>
 </head>
 <body>
 
 <header>
     <div class="container nav-bar">
-        <h1 class="logo">Kotlin</h1>
+        <h1 class="logo">Kotlin<span>Dev</span></h1>
         <nav>
             <ul class="nav-links">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#historia">Historia</a></li>
-                <li><a href="#variables">Variables</a></li>
+                <li><a href="#sintaxis">Sintaxis</a></li>
             </ul>
         </nav>
     </div>
@@ -23,32 +24,57 @@
 
 <main>
     <section id="inicio" class="hero">
-        <div class="container">
-            <h2>Descubre el poder de Kotlin</h2>
-            <p>Un lenguaje de programación moderno, conciso y seguro.</p>
-            <a href="#historia" class="btn">Empezar a leer</a>
+        <div class="hero-content reveal">
+            <div class="badge">Moderno & Conciso</div>
+            <h2>El futuro del desarrollo es <span>Kotlin</span></h2>
+            <p>Descubre el lenguaje oficial de Android que está revolucionando la forma en la que escribimos código.</p>
+            <div class="btn-group">
+                <a href="#historia" class="btn btn-primary">Explorar Historia</a>
+                <a href="#sintaxis" class="btn btn-secondary">Ver Código</a>
+            </div>
         </div>
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
     </section>
 
     <section id="historia" class="content-section">
-        <div class="container">
-            <h3>Historia del Lenguaje</h3>
-            <p>Aquí puedes empezar a escribir toda la información sobre cómo JetBrains desarrolló este lenguaje y cómo se convirtió en el estándar para Android...</p>
+        <div class="container reveal">
+            <div class="section-header">
+                <h3>¿De dónde viene?</h3>
+                <p>La evolución desde JetBrains hasta el estándar mundial.</p>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <h4>Creado por JetBrains</h4>
+                    <p>Diseñado para ser totalmente interoperable con Java, solucionando sus problemas clásicos.</p>
+                </div>
+                <div class="card">
+                    <h4>Patrocinado por Google</h4>
+                    <p>En 2017, Google anunció soporte de primera clase para Kotlin en Android.</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="variables" class="content-section">
-        <div class="container">
-            <h3>Variables y Tipos de Datos</h3>
-            <p>Aquí van las variables y los datos gg</p>
+    <section id="sintaxis" class="content-section dark-alt">
+        <div class="container reveal">
+            <div class="section-header">
+                <h3>Sintaxis Elegante</h3>
+                <p>Menos código, menos errores, más productividad.</p>
+            </div>
+            <div class="card code-card">
+                <p>// Aquí luego pueden poner ejemplos de código real</p>
+                <p>fun main() {</p>
+                <p>&nbsp;&nbsp;println("¡Hola, mundo desde Kotlin!")</p>
+                <p>}</p>
+            </div>
         </div>
     </section>
-
 </main>
 
 <footer>
-    <div class="container">
-        <p>Proyecto Teoría de Lenguajes de Programación - Equipo 3.</p>
+    <div class="container reveal">
+        <p>Hecho con marquitxs para la clase de TDLDP</p>
     </div>
 </footer>
 
