@@ -69,4 +69,29 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById(targetId).classList.add('active');
         });
     });
+
+    // ==========================================
+    // 4. SISTEMA DE TABS (Ventajas vs Desventajas)
+    // ==========================================
+    const vdTabBtns = document.querySelectorAll('.custom-tab-btn');
+
+    vdTabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // 1. Ubicamos el contenedor padre para aislar el efecto
+            const parentHeader = btn.parentElement;
+            const parentCard = parentHeader.parentElement;
+
+            // 2. Quitamos la clase 'active' de los botones hermanos
+            parentHeader.querySelectorAll('.custom-tab-btn').forEach(b => b.classList.remove('active'));
+
+            // 3. Ocultamos todos los paneles de texto de esta tarjeta
+            parentCard.querySelectorAll('.custom-tab-pane').forEach(p => p.classList.remove('active'));
+
+            // 4. Encendemos el botón clickeado y mostramos su texto
+            btn.classList.add('active');
+            const targetId = btn.getAttribute('data-target');
+            document.getElementById(targetId).classList.add('active');
+        });
+    });
+
 });

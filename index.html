@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kotlin | Proyecto de Lenguajes</title>
+    <title>Kotlin | Proyecto TDLDP </title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
         <h1 class="logo">Kotlin<span>.</span></h1>
         <nav>
             <ul class="nav-links">
-                <li><a href="#hero">Inicio</a></li>
+                <li><a href="#landpage">Inicio</a></li>
                 <li><a href="#history">Historia</a></li>
                 <li><a href="#variables">Variables & Tipos</a></li>
             </ul>
@@ -28,10 +28,9 @@
 </header>
 
 <main>
-    <section id="hero" class="hero">
+    <section id="landpage" class="hero">
         <div class="container hero-grid">
             <div class="hero-content reveal">
-                <div class="badge">Moderno & Seguro</div>
                 <h2 class="complex-reveal">
                     <span>El estándar</span>
                     <span>del futuro.</span>
@@ -72,9 +71,19 @@
                 </div>
 
 
-                <div class="glow-card reveal delay-1 span-col-2">
-                    <h4>Ventajas vs Desventajas</h4>
-                    <p>[PLACEHOLDER: Compárenlo con Java. Ej. Ventaja: Null Safety, Concisión. Desventaja: Tiempo de compilación inicial, curva de aprendizaje si vienes de lenguajes dinámicos.]</p>
+                <div class="glow-card reveal delay-1 span-col-2 custom-tab-card">
+                    <div class="custom-tab-header">
+                        <button class="custom-tab-btn ventajas active" data-target="tab-ventajas">Ventajas</button>
+                        <button class="custom-tab-btn desventajas" data-target="tab-desventajas">Desventajas</button>
+                    </div>
+                    <div class="custom-tab-body">
+                        <div id="tab-ventajas" class="custom-tab-pane active">
+                            <p>[PLACEHOLDER: Ej. Null Safety integrado, sintaxis concisa y expresiva, interoperabilidad total con Java, soporte oficial de Google para Android.]</p>
+                        </div>
+                        <div id="tab-desventajas" class="custom-tab-pane">
+                            <p>[PLACEHOLDER: Ej. Tiempo de compilación inicial ligeramente mayor, curva de aprendizaje si vienes de lenguajes puramente dinámicos, tamaño del runtime adicional.]</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="glow-card reveal delay-2 span-col-2">

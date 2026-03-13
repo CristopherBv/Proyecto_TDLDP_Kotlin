@@ -365,3 +365,58 @@ footer h5 { color: var(--text-muted); margin-bottom: 1rem; }
     .ide-sidebar, .ide-content { width: 100%; }
     .complex-reveal span { font-size: 3rem; }
 }
+
+
+/* --- Tarjeta Interactiva: Ventajas / Desventajas --- */
+.custom-tab-card {
+    padding: 0; /* Quitamos el padding global para que el header toque el borde */
+    overflow: hidden; /* Mantiene los bordes redondeados */
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-tab-header {
+    display: flex;
+    background: rgba(0, 0, 0, 0.4); /* Fondo más oscuro para la barra superior */
+    border-bottom: 1px solid var(--surface-border);
+}
+
+.custom-tab-btn {
+    flex: 1; /* Hacemos que ocupen 50% y 50% exacto */
+    background: none;
+    border: none;
+    padding: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0.4; /* Apagados cuando no están activos */
+}
+
+/* Colores Neón adaptados al Dark Mode */
+.custom-tab-btn.ventajas { color: #4ADE80; } /* Verde Esmeralda */
+.custom-tab-btn.desventajas { color: #F87171; } /* Rojo Coral */
+
+.custom-tab-btn:hover {
+    opacity: 0.8;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Estado activo: Ilumina el texto y cambia el fondo al de la tarjeta */
+.custom-tab-btn.active {
+    opacity: 1;
+    background: var(--surface);
+}
+
+.custom-tab-body {
+    padding: 2.5rem;
+}
+
+.custom-tab-pane {
+    display: none;
+    animation: fadeIn 0.4s ease; /* Reutilizamos la animación suave */
+}
+
+.custom-tab-pane.active {
+    display: block;
+}
