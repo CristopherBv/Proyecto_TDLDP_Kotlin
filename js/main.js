@@ -94,4 +94,24 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // ==========================================
+    // 5. SISTEMA DE ACORDEÓN (Para Ventajas/Desventajas)
+    // ==========================================
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            // 1. Alternar la clase 'active' en el título (<dt>)
+            header.classList.toggle('active');
+
+            // 2. Seleccionar el siguiente elemento hermano (el <dd>)
+            const content = header.nextElementSibling;
+
+            // 3. Alternar la clase 'open' para mostrar/ocultar el texto
+            if (content) {
+                content.classList.toggle('open');
+            }
+        });
+    });
+
 });

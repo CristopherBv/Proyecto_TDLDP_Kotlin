@@ -369,43 +369,56 @@ footer h5 { color: var(--text-muted); margin-bottom: 1rem; }
 
 /* --- Tarjeta Interactiva: Ventajas / Desventajas --- */
 .custom-tab-card {
-    padding: 0; /* Quitamos el padding global para que el header toque el borde */
-    overflow: hidden; /* Mantiene los bordes redondeados */
+    padding: 0;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
 }
 
+/* La barra contenedora de los botones */
 .custom-tab-header {
     display: flex;
-    background: rgba(0, 0, 0, 0.4); /* Fondo más oscuro para la barra superior */
+    background: rgba(0, 0, 0, 0.2); /* Fondo base más oscuro para crear contraste */
     border-bottom: 1px solid var(--surface-border);
 }
 
 .custom-tab-btn {
-    flex: 1; /* Hacemos que ocupen 50% y 50% exacto */
-    background: none;
+    flex: 1;
+    background: transparent;
     border: none;
     padding: 1.5rem;
     font-size: 1.2rem;
     font-weight: 800;
     cursor: pointer;
     transition: all 0.3s ease;
-    opacity: 0.4; /* Apagados cuando no están activos */
+    opacity: 0.5; /* Inactivos, un poco apagados */
 }
 
-/* Colores Neón adaptados al Dark Mode */
-.custom-tab-btn.ventajas { color: #4ADE80; } /* Verde Esmeralda */
-.custom-tab-btn.desventajas { color: #F87171; } /* Rojo Coral */
+/* Colores Base */
+.custom-tab-btn.ventajas { color: #22a856; }
+.custom-tab-btn.desventajas { color: #d42f2f; }
 
-.custom-tab-btn:hover {
-    opacity: 0.8;
-    background: rgba(255, 255, 255, 0.02);
-}
-
-/* Estado activo: Ilumina el texto y cambia el fondo al de la tarjeta */
-.custom-tab-btn.active {
+/* 🌟 HOVER & ACTIVE: Restauramos la iluminación (Glow) y opacidad total */
+.custom-tab-btn.ventajas:hover,
+.custom-tab-btn.ventajas.active {
     opacity: 1;
-    background: var(--surface);
+    color: #4ADE80; /* Tono más vibrante para el brillo */
+    text-shadow: 0 0 15px rgba(74, 222, 128, 0.4); /* Efecto Neón */
+}
+
+.custom-tab-btn.desventajas:hover,
+.custom-tab-btn.desventajas.active {
+    opacity: 1;
+    color: #F87171; /* Tono más vibrante para el brillo */
+    text-shadow: 0 0 15px rgba(248, 113, 113, 0.4); /* Efecto Neón */
+}
+
+/* ESTADO ACTIVO: Fondo sólido y profundo, acorde a la UI oscura */
+.custom-tab-btn.active {
+    /* Un negro profundo que encaja perfecto con el Dark Mode */
+    background: rgba(0, 0, 0, 0.4);
+    /* Detalle premium: un resplandor interno sutil arriba para indicar volumen */
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.05);
 }
 
 .custom-tab-body {
@@ -414,9 +427,78 @@ footer h5 { color: var(--text-muted); margin-bottom: 1rem; }
 
 .custom-tab-pane {
     display: none;
-    animation: fadeIn 0.4s ease; /* Reutilizamos la animación suave */
+    animation: fadeIn 0.4s ease;
 }
 
 .custom-tab-pane.active {
     display: block;
+}
+
+/* --- Estilos para el Acordeón (dl, dt, dd) --- */
+.accordion-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem; /* Un poco más de espacio para respirar */
+}
+
+/* Títulos desplegables */
+.accordion-header {
+    background: rgba(255, 255, 255, 0.02); /* Gris cristalino muy sutil */
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--text-main);
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--surface-border);
+    transition: all 0.3s ease;
+}
+
+.accordion-header:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateX(4px); /* Micro-interacción: se desliza un milímetro a la derecha */
+}
+
+.accordion-header.active {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+}
+
+/* Ícono "+" siempre blanco y con rebote */
+.icon {
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--text-main);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Giro con rebote sutil */
+}
+
+.accordion-header.active .icon {
+    transform: rotate(45deg);
+    color: var(--text-main);
+}
+
+/* El texto desplegado (Sin cajas, flotando libre) */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    background: transparent;
+    border: none;
+    padding: 0 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6; /* Mejor interlineado para lectura */
+    opacity: 0; /* Se desvanece al cerrar */
+    transition: max-height 0.4s cubic-bezier(0, 1, 0, 1), padding 0.4s ease, opacity 0.3s ease;
+}
+
+.accordion-content.open {
+    max-height: 400px;
+    padding: 1rem 1.5rem 1.5rem 1.5rem;
+    opacity: 1; /* Aparece suavemente junto con el despliegue */
+    transition: max-height 0.4s ease-in-out, padding 0.4s ease, opacity 0.5s ease 0.1s;
 }
