@@ -12,10 +12,6 @@
     --font-code: 'JetBrains Mono', monospace;
 }
 
-.imagenRedondeada {
-    border-radius: 15px; /* Ajusta el valor para más o menos redondeo */
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -179,6 +175,7 @@ header {
 .section-header { margin-bottom: 4rem; }
 .section-header h3 { font-size: 2.5rem; margin-bottom: 0.5rem; }
 .section-header p { color: var(--text-muted); font-size: 1.1rem; }
+.mt-4 { margin-top: 2rem; }
 
 /* --- Animaciones de Scroll --- */
 .reveal {
@@ -198,7 +195,7 @@ header {
 .delay-3 { transition-delay: 0.3s; }
 .delay-4 { transition-delay: 0.4s; }
 
-/* --- Grid Asimétrico (Bento Box) --- */
+/* --- Grid Principal --- */
 .bento-asym {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -210,28 +207,83 @@ header {
     .bento-asym { grid-template-columns: repeat(4, 1fr); }
     .span-col-2 { grid-column: span 2; }
     .span-col-3 { grid-column: span 3; }
-    .span-row-2 { grid-row: span 2; }
 }
 
-/* --- Image Placeholders --- */
-.image-placeholder {
+/* =========================================================
+   NUEVO: ESTRUCTURA EXACTA PARA FILA 1 (Cuadrados a los lados)
+   ========================================================= */
+.creators-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 900px) {
+    .creators-row {
+        /* min-content le dice a la columna 1 y 3 que usen solo el ancho necesario para mantenerse como cuadrados */
+        grid-template-columns: 1fr 2.5fr 1fr;
+        align-items: center; /* Estira todos los elementos de la fila a la misma altura */
+    }
+}
+
+.visual-box,
+#creators-carousel {
+    width: 100%; /* Obliga a la caja a respetar el límite de su columna (1fr) */
+    height: auto; /* Ya no forzamos la altura al 100% del texto */
+    aspect-ratio: 1 / 1; /* Calcula la altura automáticamente para ser un cuadrado perfecto */
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--surface-border);
+}
+
+.visual-box img,
+.image-placeholder span,
+.carousel-slide img {
+    object-fit: cover; /* Evita que la imagen se deforme al rellenar el cuadrado */
     width: 100%;
     height: 100%;
-    min-height: 250px;
-    border-radius: 16px;
+    display: block;
+}
+
+/* Carrusel Animación */
+.carousel-slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    z-index: 1;
+}
+
+.carousel-slide.active { opacity: 1; z-index: 2; }
+
+.carousel-caption {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    color: white;
+    text-align: center;
+    padding: 0.8rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Image Placeholders Base */
+.image-placeholder {
+    width: 100%; height: 100%;
     background: linear-gradient(-45deg, #0b0b0e, #1a1a24, #2a1b4d, #0b0b0e);
     background-size: 400% 400%;
     animation: liquidGradient 10s ease infinite;
-    border: 1px solid rgba(127, 82, 255, 0.2);
-    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.02);
     display: flex;
     align-items: center;
     justify-content: center;
     color: rgba(255, 255, 255, 0.3);
     font-family: var(--font-code);
     font-size: 0.9rem;
-    overflow: hidden;
-    position: relative;
 }
 
 @keyframes liquidGradient {
@@ -240,7 +292,78 @@ header {
     100% { background-position: 0% 50%; }
 }
 
-/* --- Tarjetas con Glow --- */
+/* =========================================================
+   NUEVO: ESTRUCTURA PARA FILA 2 (Iconos PNG a la izquierda)
+   ========================================================= */
+.limitations-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+    .limitations-grid { grid-template-columns: 1fr; }
+}
+
+.limitation-card {
+    /* Mantenemos la tarjeta en Flex-Column para que Kodee se vaya al fondo centrado */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 16px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.limitation-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(127, 82, 255, 0.4);
+}
+
+/* Agrupación horizontal SÓLO para el ícono y el título */
+.limitation-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.limitation-icon-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.limitation-header h5 {
+    color: var(--kotlin-purple);
+    font-size: 1.1rem;
+    margin: 0; /* Flexbox ya maneja el espacio */
+}
+
+.limitation-card p {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-muted);
+}
+
+.kodee-placeholder {
+    margin-top: auto; /* Empuja el placeholder perfectamente hacia abajo */
+    height: 120px;
+    border: 2px dashed rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.3);
+    font-family: var(--font-code);
+    font-size: 0.8rem;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* --- Tarjetas Genéricas con Glow --- */
 .glow-card {
     position: relative;
     background: var(--surface);
@@ -260,79 +383,98 @@ header {
     z-index: 10;
 }
 
-.glow-card h4 {
-    color: var(--kotlin-purple);
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
+.glow-card h4 { color: var(--kotlin-purple); font-size: 1.3rem; margin-bottom: 1rem; }
+.glow-card p { color: var(--text-muted); line-height: 1.6; }
+
+/* --- Tarjeta Ventajas / Desventajas --- */
+.custom-tab-card { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+.custom-tab-header {
+    display: flex;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid var(--surface-border);
 }
 
-.glow-card p {
-    color: var(--text-muted);
-    line-height: 1.6;
+.custom-tab-btn {
+    flex: 1; background: transparent; border: none; padding: 1.5rem;
+    font-size: 1.2rem; font-weight: 800; cursor: pointer;
+    transition: all 0.3s ease; opacity: 0.5;
+}
+
+.custom-tab-btn.ventajas { color: #22a856; }
+.custom-tab-btn.desventajas { color: #d42f2f; }
+
+.custom-tab-btn.ventajas:hover, .custom-tab-btn.ventajas.active {
+    opacity: 1; color: #4ADE80; text-shadow: 0 0 15px rgba(74, 222, 128, 0.4);
+}
+
+.custom-tab-btn.desventajas:hover, .custom-tab-btn.desventajas.active {
+    opacity: 1; color: #F87171; text-shadow: 0 0 15px rgba(248, 113, 113, 0.4);
+}
+
+.custom-tab-btn.active {
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.05);
+}
+
+.custom-tab-body { padding: 2.5rem; }
+.custom-tab-pane { display: none; animation: fadeIn 0.4s ease; }
+.custom-tab-pane.active { display: block; }
+
+/* Acordeón */
+.accordion-list { display: flex; flex-direction: column; gap: 0.8rem; }
+
+.accordion-header {
+    background: rgba(255, 255, 255, 0.02);
+    padding: 1rem 1.5rem; cursor: pointer; font-weight: 600;
+    font-size: 1.05rem; color: var(--text-main); border-radius: 8px;
+    display: flex; justify-content: space-between; align-items: center;
+    border: 1px solid var(--surface-border); transition: all 0.3s ease;
+}
+
+.accordion-header:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.1); transform: translateX(4px); }
+.accordion-header.active { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.15); border-radius: 8px; }
+
+.icon { font-size: 1.4rem; font-weight: 300; color: var(--text-main); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.accordion-header.active .icon { transform: rotate(45deg); color: var(--text-main); }
+
+.accordion-content {
+    max-height: 0; overflow: hidden; background: transparent; border: none;
+    padding: 0 1.5rem; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;
+    opacity: 0; transition: max-height 0.4s cubic-bezier(0, 1, 0, 1), padding 0.4s ease, opacity 0.3s ease;
+}
+
+.accordion-content.open {
+    max-height: 400px; padding: 1rem 1.5rem 1.5rem 1.5rem; opacity: 1;
+    transition: max-height 0.4s ease-in-out, padding 0.4s ease, opacity 0.5s ease 0.1s;
 }
 
 /* --- IDE / Tabs Interactivos --- */
 .ide-container {
-    display: flex;
-    background: #020203;
-    border: 1px solid var(--surface-border);
-    border-radius: 16px;
-    overflow: hidden;
+    display: flex; background: #020203; border: 1px solid var(--surface-border);
+    border-radius: 16px; overflow: hidden;
 }
 
 .ide-sidebar {
-    width: 30%;
-    background: rgba(255, 255, 255, 0.02);
-    border-right: 1px solid var(--surface-border);
-    display: flex;
-    flex-direction: column;
+    width: 30%; background: rgba(255, 255, 255, 0.02); border-right: 1px solid var(--surface-border);
+    display: flex; flex-direction: column;
 }
 
 .tab-btn {
-    background: none;
-    border: none;
-    color: var(--text-muted);
-    padding: 1.5rem;
-    text-align: left;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    border-left: 3px solid transparent;
-    transition: all 0.3s;
+    background: none; border: none; color: var(--text-muted); padding: 1.5rem;
+    text-align: left; font-size: 1rem; font-weight: 600; cursor: pointer;
+    border-left: 3px solid transparent; transition: all 0.3s;
 }
 
 .tab-btn:hover { background: rgba(255, 255, 255, 0.05); color: var(--text-main); }
-.tab-btn.active {
-    color: var(--kotlin-purple);
-    background: rgba(127, 82, 255, 0.05);
-    border-left: 3px solid var(--kotlin-purple);
-}
+.tab-btn.active { color: var(--kotlin-purple); background: rgba(127, 82, 255, 0.05); border-left: 3px solid var(--kotlin-purple); }
 
-.ide-content {
-    width: 70%;
-    padding: 2.5rem;
-    position: relative;
-}
-
-.tab-pane {
-    display: none;
-    animation: fadeIn 0.4s ease;
-}
-
+.ide-content { width: 70%; padding: 2.5rem; position: relative; }
+.tab-pane { display: none; animation: fadeIn 0.4s ease; }
 .tab-pane.active { display: block; }
-
 .tab-pane h4 { font-size: 1.5rem; margin-bottom: 1rem; }
 .tab-pane p { color: var(--text-muted); margin-bottom: 1.5rem; }
 
-/* Colores de Código */
-pre {
-    background: #0f1015;
-    padding: 1.5rem;
-    border-radius: 8px;
-    overflow-x: auto;
-    border: 1px solid var(--surface-border);
-}
-
+pre { background: #0f1015; padding: 1.5rem; border-radius: 8px; overflow-x: auto; border: 1px solid var(--surface-border); }
 code { font-family: var(--font-code); font-size: 0.95rem; line-height: 1.5; }
 
 .keyword { color: var(--kotlin-orange); }
@@ -347,158 +489,14 @@ code { font-family: var(--font-code); font-size: 0.95rem; line-height: 1.5; }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Footer --- */
-footer {
-    border-top: 1px solid var(--surface-border);
-    padding: 3rem 0;
-    text-align: center;
-}
-
+footer { border-top: 1px solid var(--surface-border); padding: 3rem 0; text-align: center; }
 footer h5 { color: var(--text-muted); margin-bottom: 1rem; }
 .references-list { list-style: none; color: var(--text-muted); font-size: 0.85rem; opacity: 0.7;}
 .references-list li { margin-bottom: 0.5rem; }
 
-/* Responsive adjustments */
 @media (max-width: 900px) {
     .hero-grid { grid-template-columns: 1fr; }
     .ide-container { flex-direction: column; }
     .ide-sidebar, .ide-content { width: 100%; }
     .complex-reveal span { font-size: 3rem; }
-}
-
-
-/* --- Tarjeta Interactiva: Ventajas / Desventajas --- */
-.custom-tab-card {
-    padding: 0;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-/* La barra contenedora de los botones */
-.custom-tab-header {
-    display: flex;
-    background: rgba(0, 0, 0, 0.2); /* Fondo base más oscuro para crear contraste */
-    border-bottom: 1px solid var(--surface-border);
-}
-
-.custom-tab-btn {
-    flex: 1;
-    background: transparent;
-    border: none;
-    padding: 1.5rem;
-    font-size: 1.2rem;
-    font-weight: 800;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    opacity: 0.5; /* Inactivos, un poco apagados */
-}
-
-/* Colores Base */
-.custom-tab-btn.ventajas { color: #22a856; }
-.custom-tab-btn.desventajas { color: #d42f2f; }
-
-/* 🌟 HOVER & ACTIVE: Restauramos la iluminación (Glow) y opacidad total */
-.custom-tab-btn.ventajas:hover,
-.custom-tab-btn.ventajas.active {
-    opacity: 1;
-    color: #4ADE80; /* Tono más vibrante para el brillo */
-    text-shadow: 0 0 15px rgba(74, 222, 128, 0.4); /* Efecto Neón */
-}
-
-.custom-tab-btn.desventajas:hover,
-.custom-tab-btn.desventajas.active {
-    opacity: 1;
-    color: #F87171; /* Tono más vibrante para el brillo */
-    text-shadow: 0 0 15px rgba(248, 113, 113, 0.4); /* Efecto Neón */
-}
-
-/* ESTADO ACTIVO: Fondo sólido y profundo, acorde a la UI oscura */
-.custom-tab-btn.active {
-    /* Un negro profundo que encaja perfecto con el Dark Mode */
-    background: rgba(0, 0, 0, 0.4);
-    /* Detalle premium: un resplandor interno sutil arriba para indicar volumen */
-    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.05);
-}
-
-.custom-tab-body {
-    padding: 2.5rem;
-}
-
-.custom-tab-pane {
-    display: none;
-    animation: fadeIn 0.4s ease;
-}
-
-.custom-tab-pane.active {
-    display: block;
-}
-
-/* --- Estilos para el Acordeón (dl, dt, dd) --- */
-.accordion-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem; /* Un poco más de espacio para respirar */
-}
-
-/* Títulos desplegables */
-.accordion-header {
-    background: rgba(255, 255, 255, 0.02); /* Gris cristalino muy sutil */
-    padding: 1rem 1.5rem;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 1.05rem;
-    color: var(--text-main);
-    border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid var(--surface-border);
-    transition: all 0.3s ease;
-}
-
-.accordion-header:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.1);
-    transform: translateX(4px); /* Micro-interacción: se desliza un milímetro a la derecha */
-}
-
-.accordion-header.active {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.15);
-    border-radius: 8px;
-}
-
-/* Ícono "+" siempre blanco y con rebote */
-.icon {
-    font-size: 1.4rem;
-    font-weight: 300;
-    color: var(--text-main);
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Giro con rebote sutil */
-}
-
-.accordion-header.active .icon {
-    transform: rotate(45deg);
-    color: var(--text-main);
-}
-
-/* El texto desplegado (Sin cajas, flotando libre) */
-.accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    background: transparent;
-    border: none;
-    padding: 0 1.5rem;
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    line-height: 1.6; /* Mejor interlineado para lectura */
-    opacity: 0; /* Se desvanece al cerrar */
-    transition: max-height 0.4s cubic-bezier(0, 1, 0, 1), padding 0.4s ease, opacity 0.3s ease;
-}
-
-.accordion-content.open {
-    max-height: 400px;
-    padding: 1rem 1.5rem 1.5rem 1.5rem;
-    opacity: 1; /* Aparece suavemente junto con el despliegue */
-    transition: max-height 0.4s ease-in-out, padding 0.4s ease, opacity 0.5s ease 0.1s;
 }

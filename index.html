@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kotlin | Proyecto TDLDP </title>
+    <title>Kotlin | Proyecto TDLDP</title>
     <link rel="icon" href="assets/kotlinFavicon.png" type="image/png">
 
-    #Inicio posible preview
     <meta property="og:title" content="Kotlin | Proyecto TDLDP">
     <meta property="og:description" content="Descubre el futuro del desarrollo web y móvil. Una exploración profunda del lenguaje Kotlin, su historia, paradigma y ecosistema.">
     <meta property="og:image" content="https://cristopherbv.github.io/Proyecto_TDLDP_Kotlin/assets/logoKotlin.png">
     <meta property="og:url" content="https://cristopherbv.github.io/Proyecto_TDLDP_Kotlin/">
     <meta property="og:type" content="website">
-    #Fin Posible Preview
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,7 +43,7 @@
                     <span>El estándar</span>
                     <span>del futuro.</span>
                 </h2>
-                <p>Un lenguaje de programación pragmático que combina paradigmas orientados a objetos y funcionales. Diseñado para la interoperabilidad total.</p>
+                <p>La mayoría de los lenguajes de programación populares en la actualidad nacieron en los años 80 y 90, arrastrando decisiones de diseño de su época. Kotlin representa a la nueva generación. Diseñado para la interoperabilidad total.</p>
                 <a href="#history" class="btn btn-primary">Explorar Lenguaje</a>
             </div>
             <div class="hero-visual tilt-card">
@@ -62,24 +60,75 @@
             </div>
 
             <div class="bento-asym">
-                <div class="reveal delay-2">
-                        <img src="assets/kotlinCreator.jpeg" alt="Creador de Kotlin" style="width: 100%; max-width: 350px;display: block; margin: 0 auto; border-radius: 15px;">
-                </div>
-                <div class="glow-card reveal delay-1 span-col-3">
-                    <h4>Creadores y Origen</h4>
-                    <p>[PLACEHOLDER: Escriban aquí sobre JetBrains, el año de creación y la justificación de por qué se creó para mejorar Java]</p>
+                <div class="creators-row reveal delay-1" style="grid-column: 1 / -1;">
+                    <div class="visual-box">
+                        <div class="image-placeholder">
+                            <span>[LOGO_JETBRAINS]</span>
+                        </div>
+                    </div>
+
+                    <div class="glow-card">
+                        <h4>Orígenes y Creadores</h4>
+                        <p>Fue creado en 2010 por <strong>JetBrains</strong> (empresa creadora de IntelliJ IDEA) como respuesta directa a las quejas de una industria que consideraba a Java (en ese entonces el lenguaje principal para Android) como un lenguaje excesivamente estricto y verboso. <strong>Dmitry Jemerov</strong> evaluó alternativas como Scala, pero al notar que sus tiempos de compilación eran inaceptables, decidieron crear su propio "Java moderno". Contrataron a <strong>Andrey Breslav</strong> como Diseñador Principal con la misión de construir una herramienta moderna, concisa y totalmente interoperable con Java.</p>
+                    </div>
+
+                    <div class="visual-box carousel-container" id="creators-carousel">
+                        <div class="carousel-slide active">
+                            <div class="image-placeholder">
+                                <span>[FOTO_DMITRY]</span>
+                            </div>
+                            <div class="carousel-caption">Dmitry Jemerov</div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="image-placeholder">
+                                <span>[FOTO_ANDREY]</span>
+                            </div>
+                            <div class="carousel-caption">Andrey Breslav</div>
+                        </div>
+                    </div>
                 </div>
 
+                <div class="reveal delay-1 mt-4" style="grid-column: 1 / -1;">
+                    <h4 style="color: var(--text-main); font-size: 1.5rem; margin-bottom: 1.5rem;">Las limitaciones técnicas de Java</h4>
+
+                    <div class="limitations-grid">
+                        <div class="glow-card limitation-card">
+                            <div class="limitation-header">
+                                <img src="assets/icon_error.png" alt="Icono de error" class="limitation-icon-img">
+                                <h5>El "Error del Billón de Dólares"</h5>
+                            </div>
+                            <p>El fallo más común en Java (NullPointerException) causaba que las apps colapsaran. Kotlin se diseñó con Null Safety nativo para erradicar esto.</p>
+                            <div class="kodee-placeholder"><span>[KODEE_1.PNG]</span></div>
+                        </div>
+
+                        <div class="glow-card limitation-card">
+                            <div class="limitation-header">
+                                <img src="assets/icon_repetitivo.png" alt="Icono de repetición" class="limitation-icon-img">
+                                <h5>Código Repetitivo</h5>
+                            </div>
+                            <p>Tareas sencillas requerían decenas de líneas rutinarias. Kotlin prioriza la concisión: expresar ideas con el menor código posible.</p>
+                            <div class="kodee-placeholder"><span>[KODEE_2.PNG]</span></div>
+                        </div>
+
+                        <div class="glow-card limitation-card">
+                            <div class="limitation-header">
+                                <img src="assets/icon_tortuga.png" alt="Icono de estancamiento" class="limitation-icon-img">
+                                <h5>Estancamiento</h5>
+                            </div>
+                            <p>La evolución de Java era lenta. Se necesitaba un lenguaje ágil que combinara la Programación Orientada a Objetos con la Funcional.</p>
+                            <div class="kodee-placeholder"><span>[KODEE_3.PNG]</span></div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="glow-card reveal delay-4 span-col-3">
                     <h4>Paradigma y Compilación</h4>
                     <p>[PLACEHOLDER: Expliquen que es multiparadigma (OO y Funcional) y su método de implementación (Compilador a Bytecode de la JVM, Kotlin/Native, Kotlin/JS)]</p>
                 </div>
 
-                <div class="reveal delay-3 ">
-                    <img src="assets/kotlinMascota1.png" alt="Mascota de Kotlin" style="width: 100%; max-width: 350px; display: block; margin: 0 auto; filter: drop-shadow(0 10px 30px rgba(230, 227, 237, 0.5));">
+                <div class="reveal delay-3" style="display: flex; align-items: center; justify-content: center; height: 100%;">
+                    <img src="assets/kotlinMascota1.png" alt="Mascota de Kotlin" style="width: 100%; max-width: 250px; object-fit: contain; filter: drop-shadow(0 10px 30px rgba(127, 82, 255, 0.15));">
                 </div>
-
 
                 <div class="glow-card reveal delay-1 span-col-2 custom-tab-card">
                     <div class="custom-tab-header">
