@@ -309,7 +309,7 @@ header {
     /* Mantenemos la tarjeta en Flex-Column para que Kodee se vaya al fondo centrado */
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 90%;
     padding: 2rem;
     background: var(--surface);
     border: 1px solid var(--surface-border);
@@ -331,15 +331,15 @@ header {
 }
 
 .limitation-icon-img {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     object-fit: contain;
     flex-shrink: 0;
 }
 
 .limitation-header h5 {
     color: var(--kotlin-purple);
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin: 0; /* Flexbox ya maneja el espacio */
 }
 
