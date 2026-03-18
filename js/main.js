@@ -128,4 +128,30 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 3000); // 3 segundos
     }
 
+// ==========================================
+    // 7. LÍNEA DE TIEMPO COMPACTA INTERACTIVA
+    // ==========================================
+    const tNodes = document.querySelectorAll('.timeline-nodes .node');
+    const tPanes = document.querySelectorAll('.timeline-viewer .details-pane');
+
+    tNodes.forEach(node => {
+        node.addEventListener('click', () => {
+            // 1. Quitar 'active' de todos los nodos de la línea de tiempo
+            tNodes.forEach(n => n.classList.remove('active'));
+
+            // 2. Quitar 'active' de todos los paneles de la línea de tiempo
+            tPanes.forEach(p => p.classList.remove('active'));
+
+            // 3. Activar el nodo clickeado
+            node.classList.add('active');
+
+            // 4. Mostrar el panel correspondiente (obteniendo el data-pane)
+            const targetPaneId = node.getAttribute('data-pane');
+            const targetPane = document.getElementById(targetPaneId);
+            if(targetPane){
+                targetPane.classList.add('active');
+            }
+        });
+    });
+
 });
