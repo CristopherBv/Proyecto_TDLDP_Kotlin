@@ -8,13 +8,13 @@
 
     <meta property="og:title" content="Kotlin | Proyecto TDLDP">
     <meta property="og:description" content="Descubre el futuro del desarrollo web y móvil. Una exploración profunda del lenguaje Kotlin, su historia, paradigma y ecosistema.">
-    <meta property="og:image" content="https://cristopherbv.github.io/Proyecto_TDLDP_Kotlin/assets/logoKotlin.png">
+    <meta property="og:image" content="https://cristopherbv.github.io/Proyecto_TDLDP_Kotlin/assets/kotlinLogo.png">
     <meta property="og:url" content="https://cristopherbv.github.io/Proyecto_TDLDP_Kotlin/">
     <meta property="og:type" content="website">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <script defer src="js/main.js"></script>
 </head>
@@ -23,6 +23,9 @@
 <div class="fluid-bg fluid-2"></div>
 
 <header>
+    <div class="scroll-progress-container">
+        <div class="scroll-progress-bar" id="progressBar"></div>
+    </div>
     <div class="container nav-bar">
         <h1 class="logo">Kotlin<span>.</span></h1>
         <nav>
@@ -86,7 +89,7 @@
                     <h4 style="color: var(--text-main); font-size: 1.5rem; margin-bottom: 1.5rem;">Las limitaciones técnicas de Java</h4>
 
                     <div class="limitations-grid">
-                        <div class="glow-card limitation-card">
+                        <div class="glow-card limitation-card reveal delay-1">
                             <div class="limitation-header">
                                 <img src="assets/kodee-lost.png" alt="Icono de error" class="limitation-icon-img">
                                 <h5>El "Error del Billón de Dólares"</h5>
@@ -94,7 +97,7 @@
                             <p>El fallo más común en Java (NullPointerException) causaba que las apps colapsaran. Kotlin se diseñó con Null Safety nativo para erradicar esto.</p>
                         </div>
 
-                        <div class="glow-card limitation-card">
+                        <div class="glow-card limitation-card reveal delay-2">
                             <div class="limitation-header">
                                 <img src="assets/kodee-floating.gif" alt="Icono de repetición" class="limitation-icon-img">
                                 <h5>Código Repetitivo</h5>
@@ -102,7 +105,7 @@
                             <p>Tareas sencillas requerían decenas de líneas rutinarias. Kotlin prioriza expresar ideas con el menor código posible.</p>
                         </div>
 
-                        <div class="glow-card limitation-card">
+                        <div class="glow-card limitation-card reveal delay-3">
                             <div class="limitation-header">
                                 <img src="assets/kodee-loading.gif" alt="Icono de estancamiento" class="limitation-icon-img">
                                 <h5>Estancamiento</h5>
@@ -223,8 +226,51 @@
                 </div>
 
                 <div class="glow-card reveal delay-4 span-col-3">
-                    <h4>Paradigma y Compilación</h4>
-                    <p>[PLACEHOLDER: Expliquen que es multiparadigma (OO y Funcional) y su método de implementación (Compilador a Bytecode de la JVM, Kotlin/Native, Kotlin/JS)]</p>
+                    <div class="compiler-section-header">
+                        <h4>Paradigma y Compilación</h4>
+                        <p>Kotlin fusiona la Programación Orientada a Objetos (POO) con la Programación Funcional. Soporta jerarquías explícitas y polimorfismo, mientras ofrece funciones de primera clase y literales lambda.</p>
+                    </div>
+                    
+                    <div class="k2-compiler-hub">
+                        <div class="compiler-intro">
+                            <h5>Compilador K2: Flexibilidad Multiplataforma</h5>
+                            <p>El backend de última generación que permite a Kotlin hablar el lenguaje de cada sistema.</p>
+                        </div>
+                        
+                        <div class="compiler-grid">
+                            <div class="compiler-chip jvm">
+                                <div class="chip-icon">☕</div>
+                                <div class="chip-content">
+                                    <strong>Kotlin/JVM</strong>
+                                    <span>Bytecode para la Máquina Virtual de Java.</span>
+                                </div>
+                            </div>
+                            
+                            <div class="compiler-chip js">
+                                <div class="chip-icon">JS</div>
+                                <div class="chip-content">
+                                    <strong>Kotlin/JS</strong>
+                                    <span>Transpilación a JavaScript para Web y Node.</span>
+                                </div>
+                            </div>
+                            
+                            <div class="compiler-chip wasm">
+                                <div class="chip-icon">⚡</div>
+                                <div class="chip-content">
+                                    <strong>Kotlin/Wasm</strong>
+                                    <span>WebAssembly para máximo rendimiento web.</span>
+                                </div>
+                            </div>
+                            
+                            <div class="compiler-chip native">
+                                <div class="chip-icon">⚙️</div>
+                                <div class="chip-content">
+                                    <strong>Kotlin/Native</strong>
+                                    <span>Binarios nativos (Windows, iOS, macOS) vía LLVM.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="reveal delay-3" style="display: flex; align-items: center; justify-content: center; height: 100%;">
@@ -277,9 +323,46 @@
                     </div>
                 </div>
 
-                <div class="glow-card reveal delay-2 span-col-2">
-                    <h4>Áreas de Aplicación</h4>
-                    <p>[PLACEHOLDER: Mencionen Android Development oficial, Backend con Spring Boot, y KMP (Kotlin Multiplatform)]</p>
+                <div class="glow-card reveal delay-2 span-col-2 apps-ecosystem-card">
+                    <h4>Ecosistema y Aplicaciones</h4>
+                    <div class="ecosystem-grid">
+                        <!-- Android Section -->
+                        <div class="ecosystem-item android">
+                            <div class="eco-visual">
+                                <div class="android-mascot-mini">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M17.523 15.3414C17.0143 15.3414 16.6023 14.9293 16.6023 14.4207C16.6023 13.912 17.0143 13.5 17.523 13.5C18.0317 13.5 18.4437 13.912 18.4437 14.4207C18.4437 14.9293 18.0317 15.3414 17.523 15.3414ZM6.477 15.3414C5.96829 15.3414 5.5563 14.9293 5.5563 14.4207C5.5563 13.912 5.96829 13.5 6.477 13.5C6.98571 13.5 7.3977 13.912 7.3977 14.4207C7.3977 14.9293 6.98571 15.3414 6.477 15.3414ZM17.8954 10.9024L19.746 7.69756C19.8283 7.55488 19.7794 7.37317 19.6366 7.29024C19.4939 7.20732 19.3122 7.2561 19.2293 7.39878L17.3512 10.6512C15.822 9.96585 14.1146 9.58537 12.3049 9.58537C10.4951 9.58537 8.7878 9.96585 7.25854 10.6512L5.38049 7.39878C5.29756 7.2561 5.11585 7.20732 4.97317 7.29024C4.83049 7.37317 4.78146 7.55488 4.86439 7.69756L6.71463 10.9024C3.12439 12.722 0.682927 16.3488 0.312195 20.5854H23.6878C23.3171 16.3488 20.8756 12.722 17.8954 10.9024Z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="eco-info">
+                                <h5>Android Oficial</h5>
+                                <p>Lenguaje preferido por Google. UI moderna con Jetpack Compose y estabilidad total.</p>
+                            </div>
+                        </div>
+
+                        <!-- Backend Section -->
+                        <div class="ecosystem-item backend">
+                            <div class="eco-visual">
+                                <div class="eco-icon-box">☁️</div>
+                            </div>
+                            <div class="eco-info">
+                                <h5>Backend Robusto</h5>
+                                <p>Adopción masiva en Spring Boot y Ktor gracias a su seguridad ante nulos (Null Safety).</p>
+                            </div>
+                        </div>
+
+                        <!-- Multiplatform Section -->
+                        <div class="ecosystem-item multiplatform">
+                            <div class="eco-visual">
+                                <div class="eco-icon-box">💻</div>
+                            </div>
+                            <div class="eco-info">
+                                <h5>Kotlin Multiplatform</h5>
+                                <p>Un solo código para iOS, Web y Desktop sin sacrificar el rendimiento nativo.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -303,14 +386,14 @@
                 <div class="ide-content">
                     <div id="identificadores" class="tab-pane active">
                         <h4>Reglas para Identificadores</h4>
-                        <p>[PLACEHOLDER: Expliquen cómo nombrar variables, case sensitivity, y que no pueden usar palabras reservadas]</p>
+                        <p>Los identificadores en Kotlin son nombres para variables, funciones y clases. Siguen la convención <strong>camelCase</strong>, son sensibles a mayúsculas y no pueden comenzar con números ni usar palabras reservadas del lenguaje.</p>
                         <pre><code><span class="keyword">val</span> <span class="variable">nombreUsuario</span> = <span class="string">"Diego"</span>
 <span class="comment">// Los identificadores deben ser camelCase</span></code></pre>
                     </div>
 
                     <div id="primitivos" class="tab-pane">
                         <h4>Tipos de Datos "Primitivos"</h4>
-                        <p>[PLACEHOLDER: Expliquen que en Kotlin todo es un objeto, pero en tiempo de ejecución se optimizan a primitivos (Int, Double, Boolean, Char)]</p>
+                        <p>A diferencia de Java, en Kotlin <strong>todo es un objeto</strong> desde la perspectiva del desarrollador. Sin embargo, el compilador optimiza estos tipos (como <code>Int</code>, <code>Double</code>, <code>Boolean</code>) a tipos primitivos de la JVM siempre que sea posible para maximizar el rendimiento.</p>
                         <pre><code><span class="keyword">val</span> <span class="variable">edad</span>: <span class="type">Int</span> = <span class="number">20</span>
 <span class="keyword">val</span> <span class="variable">pi</span>: <span class="type">Double</span> = <span class="number">3.14159</span>
 <span class="keyword">val</span> <span class="variable">esActivo</span>: <span class="type">Boolean</span> = <span class="keyword">true</span></code></pre>
@@ -318,7 +401,7 @@
 
                     <div id="declaracion" class="tab-pane">
                         <h4>Asignación y Declaración</h4>
-                        <p>[PLACEHOLDER: Detallen la diferencia entre Inferencia de tipos, Inmutabilidad (val) y Mutabilidad (var)]</p>
+                        <p>Kotlin utiliza <code>val</code> para variables de solo lectura (inmutables) y <code>var</code> para variables mutables. Posee un potente sistema de <strong>inferencia de tipos</strong> que permite omitir la declaración explícita del tipo si el compilador puede deducirlo del valor inicial.</p>
                         <pre><code><span class="comment">// Variable inmutable (Constante)</span>
 <span class="keyword">val</span> <span class="variable">universidad</span> = <span class="string">"UADY"</span>
 
@@ -329,7 +412,7 @@
 
                     <div id="usuario" class="tab-pane">
                         <h4>Tipos definidos por el usuario</h4>
-                        <p>[PLACEHOLDER: Mencionen clases, Data Classes y cómo se instancian sin la palabra 'new']</p>
+                        <p>Los desarrolladores pueden crear sus propios tipos mediante <strong>clases</strong> y <strong>Data Classes</strong>. Estas últimas son ideales para modelar datos, ya que el compilador genera automáticamente métodos útiles como <code>equals()</code>, <code>hashCode()</code> y <code>toString()</code>.</p>
                         <pre><code><span class="keyword">data class</span> <span class="type">Estudiante</span>(<span class="keyword">val</span> nombre: <span class="type">String</span>, <span class="keyword">var</span> calificacion: <span class="type">Int</span>)
 
 <span class="keyword">val</span> <span class="variable">alumno1</span> = <span class="type">Estudiante</span>(<span class="string">"Agustín"</span>, <span class="number">100</span>)</code></pre>
@@ -344,8 +427,9 @@
     <div class="container reveal">
         <h5>Referencias y Citaciones</h5>
         <ul class="references-list">
-            <li>[PLACEHOLDER: Apellido, A. A. (Año). Título del artículo. Nombre de la revista, volumen(número), páginas. URL]</li>
-            <li>[PLACEHOLDER: JetBrains. (2024). Kotlin Documentation. Recuperado de https://kotlinlang.org/docs/home.html]</li>
+            <li>JetBrains. (2024). Kotlin Documentation. Recuperado de https://kotlinlang.org/docs/home.html</li>
+            <li>Google Developers. (2023). Android Kotlin Fundamentals. Recuperado de https://developer.android.com/kotlin</li>
+            <li>Jemerov, D., & Isakova, S. (2017). Kotlin in Action. Manning Publications.</li>
         </ul>
     </div>
 </footer>
