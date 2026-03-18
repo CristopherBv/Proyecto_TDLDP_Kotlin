@@ -240,22 +240,38 @@
                         <div id="tab-ventajas" class="custom-tab-pane active">
                             <dl class="accordion-list">
                                 <dt class="accordion-header">Null Safety Nativo <span class="icon">+</span></dt>
-                                <dd class="accordion-content">[PLACEHOLDER: Elimina el error del billón de dólares (NullPointerException) desde la compilación.]</dd>
+                                <dd class="accordion-content">Frente a Java, que sufre mucho por los errores cuando el sistema intenta leer un dato que "no existe" o está vacío (NullPointerException), Kotlin te obliga a manejar esos casos desde que estás escribiendo el código. Esto previene sorpresas y hace que las aplicaciones sean mucho más estables.</dd>
 
-                                <dt class="accordion-header">Sintaxis Concisa <span class="icon">+</span></dt>
-                                <dd class="accordion-content">[PLACEHOLDER: Reduce drásticamente el código boilerplate comparado con Java, logrando lo mismo en menos líneas.]</dd>
+                                <dt class="accordion-header">Sintaxis Concisa y Directa <span class="icon">+</span></dt>
+                                <dd class="accordion-content">Frente a lenguajes como Java o C++, Kotlin te permite hacer lo mismo escribiendo mucho menos código. Te ahorra tener que escribir bloques de texto repetitivo y aburrido solo para configurar datos simples. Al escribir menos líneas, el código es más fácil de leer, mantener y hay menos espacio para cometer errores.</dd>
 
-                                <dt class="accordion-header">Interoperabilidad <span class="icon">+</span></dt>
-                                <dd class="accordion-content">[PLACEHOLDER: Es 100% compatible con Java. Puedes usar librerías de Java en Kotlin y viceversa sin problemas.]</dd>
+                                <dt class="accordion-header">Interoperabilidad con Java <span class="icon">+</span></dt>
+                                <dd class="accordion-content">Frente a lenguajes como Swift (que a veces requiere reescribir todo el código viejo de Objective-C para que funcione bien), Kotlin te permite combinar archivos de Java y Kotlin en el mismo proyecto sin problemas. Puedes usar código antiguo de Java sin tener que modificarlo ni un poco.</dd>
+
+                                <dt class="accordion-header">Tareas en Segundo Plano más Ligeras <span class="icon">+</span></dt>
+                                <dd class="accordion-content">Frente a Java, que usa métodos muy pesados y complejos para hacer varias cosas a la vez, Kotlin introdujo las "Corrutinas". Son una forma súper ligera de hacer tareas en segundo plano (como descargar datos de internet o cargar imágenes) sin trabar la pantalla del usuario y consumiendo mucha menos memoria del dispositivo.</dd>
+
+                                <dt class="accordion-header">Capacidades Multiplataforma (Compilación Directa) <span class="icon">+</span></dt>
+                                <dd class="accordion-content">Frente a C++ o herramientas como Flutter, Kotlin te permite escribir la lógica de tu programa una sola vez y compartirla entre Android, iOS y computadoras de escritorio. Esto es posible gracias a una tecnología llamada Kotlin/Native, que compila tu código directamente a lenguaje máquina sin necesidad de programas intermediarios. Esto hace que la aplicación arranque al instante, consuma poca memoria y corra de forma 100% nativa en cualquier dispositivo.</dd>
                             </dl>
                         </div>
+
                         <div id="tab-desventajas" class="custom-tab-pane">
                             <dl class="accordion-list">
-                                <dt class="accordion-header">Tiempo de Compilación <span class="icon">+</span></dt>
-                                <dd class="accordion-content">[PLACEHOLDER: Las compilaciones limpias pueden ser ligeramente más lentas que en Java debido a la complejidad del compilador.]</dd>
+                                <dt class="accordion-header">Tiempo de Compilación Inicial <span class="icon">+</span></dt>
+                                <dd class="accordion-content">Frente a Java puro, la primera vez que compilas un proyecto desde cero en Kotlin puede tardar un poco más por las revisiones de seguridad extra que hace. Esta desventaja se vuelve mucho más notoria si usas la compilación directa (Kotlin/Native) para iOS o escritorio, ya que traducir el código moderno directamente a lenguaje máquina exige muchísimo más tiempo y recursos de tu computadora.</dd>
 
                                 <dt class="accordion-header">Curva de Aprendizaje <span class="icon">+</span></dt>
-                                <dd class="accordion-content">[PLACEHOLDER: Su sintaxis avanzada y conceptos de programación funcional pueden costar al principio si vienes de lenguajes muy estructurados.]</dd>
+                                <dd class="accordion-content">Frente a lenguajes más antiguos y tradicionales, Kotlin usa formas de pensar más modernas (mezclando distintos estilos de programación). Si un equipo de desarrolladores está muy acostumbrado a la forma vieja de hacer las cosas en Java, les tomará tiempo, esfuerzo y estudio adaptarse a las nuevas herramientas.</dd>
+
+                                <dt class="accordion-header">Tamaño Extra en la Aplicación <span class="icon">+</span></dt>
+                                <dd class="accordion-content">Frente a lenguajes de bajo nivel como C++ o Rust, las aplicaciones hechas en Kotlin que corren sobre la Máquina Virtual de Java necesitan empaquetar una pequeña "caja de herramientas" extra (la librería estándar) para poder funcionar. Aunque en los celulares modernos ese peso no se nota, en sistemas con memoria extremadamente limitada sí es un detalle a considerar.</dd>
+
+                                <dt class="accordion-header">Optimización del Entorno de Ejecución <span class="icon">+</span></dt>
+                                <dd class="accordion-content">Frente a Java, hay una ligerísima desventaja de rendimiento en casos muy extremos. Como el entorno donde corren ambos lenguajes (la JVM) fue creado y pulido durante décadas específicamente para Java, a veces el código de Java puro se ejecuta una fracción microscópica más rápido que el de Kotlin en procesos matemáticos súper pesados.</dd>
+
+                                <dt class="accordion-header">Pérdida de Librerías (al compilar directamente) <span class="icon">+</span></dt>
+                                <dd class="accordion-content">Aunque la compilación directa a lenguaje máquina (Kotlin/Native) tiene grandes beneficios de rendimiento frente a Java, tiene un costo, pues al saltarte el entorno tradicional de Java para ir directo al procesador, pierdes el acceso automático a las miles de librerías gratuitas de Java que se han construido durante décadas y quedas limitado a usar únicamente las herramientas creadas específicamente para el ecosistema puro de Kotlin.</dd>
                             </dl>
                         </div>
                     </div>
