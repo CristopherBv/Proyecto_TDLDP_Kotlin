@@ -719,17 +719,27 @@ footer h5 { color: var(--text-muted); margin-bottom: 1rem; }
     position: relative;
     padding: 0;
     margin: 0;
-    height: 110px; /* Aumentado para dar espacio al texto guía */
+    height: 110px;
     display: flex;
     align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch; /* Scroll suave en móviles */
+}
+
+.timeline-nav::-webkit-scrollbar {
+    display: none;
 }
 
 /* La línea base de fondo */
 .timeline-nav-line {
     position: absolute;
-    top: 35px; /* Ajustado al centro geométrico de los círculos */
+    top: 35px;
     left: 0;
     width: 100%;
+    min-width: max-content; /* Se adapta al contenido */
     height: 2px;
     background: rgba(127, 82, 255, 0.1);
     z-index: 1;
@@ -739,10 +749,21 @@ footer h5 { color: var(--text-muted); margin-bottom: 1rem; }
     position: relative;
     z-index: 2;
     display: flex;
-    justify-content: space-around;
-    align-items: flex-start; /* Alinea los wrappers arriba */
+    justify-content: flex-start; /* Alineado al inicio para permitir scroll correcto */
+    align-items: flex-start;
     height: 100%;
-    width: 100%;
+    min-width: max-content; /* Garantiza que no se colapsen los nodos */
+    padding: 0 2rem; /* Espacio extra a los lados para el scroll */
+    gap: 3rem; /* Espacio entre fechas en móvil */
+}
+
+@media (min-width: 1024px) {
+    .timeline-nodes {
+        justify-content: space-around;
+        width: 100%;
+        padding: 0;
+        gap: 0;
+    }
 }
 
 /* Contenedor Flex para Año (arriba) y Guía (abajo) */
@@ -807,15 +828,16 @@ footer h5 { color: var(--text-muted); margin-bottom: 1rem; }
     padding: 1.5rem;
     position: relative;
 
-    /* ALTURA FIJA: Previene que la grid se estire verticalmente */
+    /* ALTURA FIJA: Previene que la grid se estire verticalmente en desktop */
     height: 180px;
     overflow: hidden;
+    display: flex;
 }
 
 @media (max-width: 900px) {
     .node-wrapper { width: 70px; }
     .timeline-node-guide { display: none; } /* Ocultamos guía en móvil para que no choquen */
-    .timeline-viewer { height: auto; min-height: 180px; }
+    .timeline-viewer { height: auto; min-height: auto; padding: 1.5rem; display: block; overflow: visible; }
 }
 
 /* Paneles de Contenido */
@@ -834,6 +856,23 @@ footer h5 { color: var(--text-muted); margin-bottom: 1rem; }
     display: flex;
     opacity: 1; pointer-events: auto;
     animation: fadeInTab 0.4s ease forwards;
+    z-index: 2;
+}
+
+@media (max-width: 900px) {
+    .details-pane {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .details-pane.active {
+        position: relative;
+    }
 }
 
 .details-img {
@@ -847,12 +886,25 @@ footer h5 { color: var(--text-muted); margin-bottom: 1rem; }
 }
 
 @media (max-width: 900px) {
-    .details-img { width: 80px; height: 80px; padding: 1rem; }
+    .details-img { width: 80px; height: 80px; padding: 0.5rem; margin: 0 auto; }
 }
 
-.details-text h5 { color: var(--text-main); font-size: 1.15rem; margin-bottom: 0.5rem; }
+.details-text {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 100%;
+    padding-right: 5px;
+}
+
+/* Scrollbar personalizada para el texto en desktop */
+.details-text::-webkit-scrollbar { width: 4px; }
+.details-text::-webkit-scrollbar-track { background: transparent; }
+.details-text::-webkit-scrollbar-thumb { background: rgba(127, 82, 255, 0.3); border-radius: 4px; }
+.details-text::-webkit-scrollbar-thumb:hover { background: rgba(127, 82, 255, 0.5); }
+
+.details-text h5 { color: var(--text-main); font-size: clamp(1.05rem, 3vw, 1.15rem); margin-bottom: 0.5rem; }
 .details-text h5 span.timeline-purple-text { color: var(--kotlin-purple); font-weight: 800; }
-.details-text p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+.details-text p { color: var(--text-muted); font-size: clamp(0.85rem, 2vw, 0.9rem); line-height: 1.6; margin: 0; }
 
 @keyframes fadeInTab {
     from { opacity: 0; transform: translateY(10px); }
