@@ -733,28 +733,28 @@ footer h5 { color: var(--text-muted); margin-bottom: 1rem; }
     display: none;
 }
 
-/* La línea base de fondo */
-.timeline-nav-line {
-    position: absolute;
-    top: 35px;
-    left: 0;
-    width: 100%;
-    min-width: max-content; /* Se adapta al contenido */
-    height: 2px;
-    background: rgba(127, 82, 255, 0.1);
-    z-index: 1;
-}
-
+/* La línea base de fondo - Ahora integrada en el contenedor de nodos para evitar cortes */
 .timeline-nodes {
     position: relative;
     z-index: 2;
     display: flex;
-    justify-content: flex-start; /* Alineado al inicio para permitir scroll correcto */
+    justify-content: flex-start;
     align-items: flex-start;
     height: 100%;
-    min-width: max-content; /* Garantiza que no se colapsen los nodos */
-    padding: 0 2rem; /* Espacio extra a los lados para el scroll */
-    gap: 3rem; /* Espacio entre fechas en móvil */
+    min-width: max-content;
+    padding: 0 3rem; /* Aumentado para mejor respiro al final */
+    gap: 3rem;
+}
+
+.timeline-nodes::before {
+    content: '';
+    position: absolute;
+    top: 35px; /* Alineado con el centro de los nodos */
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(127, 82, 255, 0.15);
+    z-index: -1; /* Pasa por debajo de los botones (.node) */
 }
 
 @media (min-width: 1024px) {
