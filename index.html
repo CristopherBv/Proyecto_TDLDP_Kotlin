@@ -380,61 +380,133 @@
                     <button class="tab-btn active" data-target="identificadores">Reglas para identificadores</button>
                     <button class="tab-btn" data-target="primitivos">Tipos de datos primitivos</button>
                     <button class="tab-btn" data-target="declaracion">Declaración, definición y asignación</button>
+                    <button class="tab-btn" data-target="flujo">Estructuras de control de flujo</button>
                     <button class="tab-btn" data-target="usuario">Tipos definidos por el usuario</button>
                 </div>
 
                 <div class="ide-content">
                     <div id="identificadores" class="tab-pane active">
-                        <h4>Reglas para Identificadores y Sintaxis</h4>
-                        <p>Según la gramática léxica de Kotlin, los identificadores pueden contener letras, dígitos y guiones bajos (<code>_</code>), pero tienen la restricción estricta de <strong>no comenzar con un dígito</strong>. El lenguaje es estrictamente <em>case-sensitive</em> y los puntos y coma (<code>;</code>) son opcionales, ya que el compilador infiere el final de la instrucción por el salto de línea.</p>
+                        <h4>La Documentación Oficial y Sintaxis</h4>
+                        <p>La <strong>documentación oficial de Kotlin</strong> (mantenida por JetBrains) es la fuente de verdad que dicta tanto la gramática léxica como las convenciones idiomáticas. Según esta especificación, los identificadores pueden contener letras, dígitos y guiones bajos (<code>_</code>), pero <strong>no pueden comenzar con un dígito</strong>. El lenguaje es estrictamente <em>case-sensitive</em> y los puntos y coma (<code>;</code>) son opcionales.</p>
                         <p>La especificación divide las palabras clave en dos categorías:</p>
                         <ul class="ide-list">
                             <li><strong>Hard Keywords:</strong> Palabras como <code>class</code>, <code>val</code> o <code>fun</code> que nunca pueden usarse como nombres.</li>
-                            <li><strong>Soft Keywords:</strong> Palabras como <code>import</code> o <code>catch</code> que pueden actuar como identificadores en ciertos contextos.</li>
+                            <li><strong>Soft Keywords:</strong> Palabras como <code>import</code> que actúan como identificadores según el contexto.</li>
                         </ul>
-                        <p>Para garantizar la interoperabilidad (por ejemplo, al llamar a un método de Java que usa una palabra reservada), Kotlin permite el uso de <strong>identificadores escapados</strong> mediante <em>backticks</em>:</p>
-                        <pre><code><span class="keyword">val</span> <span class="variable">`when`</span> = <span class="string">"Ahora"</span> <span class="comment">// Válido gracias a las comillas invertidas</span></code></pre>
+                        <p>Para la interoperabilidad con Java, se permiten <strong>identificadores escapados</strong> mediante <em>backticks</em> (<code>`</code>).</p>
+
+                        <h4 style="margin-top: 1.5rem;">Estructura de Strings (Plantillas)</h4>
+                        <p>La documentación destaca el uso de <strong>String Templates</strong>. En lugar de concatenar con <code>+</code>, Kotlin permite incrustar variables o expresiones directamente en un String usando el símbolo <code>$</code>, mejorando la legibilidad.</p>
+                        <pre><code><span class="keyword">val</span> <span class="variable">`when`</span> = <span class="string">"Ahora"</span> <span class="comment">// Uso de palabra reservada con backticks</span>
+<span class="keyword">val</span> <span class="variable">saludo</span> = <span class="string">"Hola, $`when`"</span> <span class="comment">// Incrusta la variable directamente</span>
+<span class="keyword">val</span> <span class="variable">info</span> = <span class="string">"Longitud: ${saludo.length}"</span> <span class="comment">// Evalúa la expresión entre llaves</span></code></pre>
                     </div>
 
                     <div id="primitivos" class="tab-pane">
                         <h4>Sistema de Tipos Unificado y Operadores</h4>
-                        <p>El sistema de tipos de Kotlin tiene como raíz a <code>Any?</code>, estableciendo que <strong>todo es un objeto</strong>. A diferencia de Java, no existen tipos primitivos separados gramaticalmente. Sin embargo, para mantener un rendimiento óptimo, el compilador realiza una optimización profunda:</p>
-                        <ul class="ide-list">
-                            <li>Los tipos no anulables (como <code>Int</code> o <code>Boolean</code>) se mapean directamente a primitivos de la JVM (<code>int</code>, <code>boolean</code>).</li>
-                            <li>Si el tipo es anulable (<code>Int?</code>) o se usa en genéricos, el compilador realiza un <em>boxing</em> y lo trata como un objeto real en memoria.</li>
-                        </ul>
-                        <p><strong>Operadores Frecuentes:</strong> En Kotlin, los operadores son llamadas a funciones bajo el capó (sobrecarga de operadores):</p>
+                        <p>El sistema de tipos de Kotlin tiene como raíz a <code>Any?</code>, estableciendo que <strong>todo es un objeto</strong>. No existen tipos primitivos separados gramaticalmente. Sin embargo, el compilador realiza una optimización: mapea tipos no anulables (<code>Int</code>, <code>Boolean</code>) a primitivos de la JVM (<code>int</code>), y hace <em>boxing</em> solo cuando son anulables o genéricos.</p>
+                        <p><strong>Operadores Frecuentes:</strong> Son llamadas a funciones bajo el capó (sobrecarga de operadores):</p>
                         <ul class="ide-list">
                             <li><strong>Aritméticos:</strong> <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code></li>
-                            <li><strong>Comparación Estructural:</strong> <code>==</code> y <code>!=</code> (se traducen a la función <code>equals()</code>). Para comprobar identidad de memoria exacta se usa <code>===</code>.</li>
-                            <li><strong>Seguridad contra Nulos:</strong> <code>?.</code> (Llamada segura que evita NullPointerException), <code>?:</code> (Operador Elvis para valores por defecto), <code>!!</code> (Aserción de no nulidad).</li>
+                            <li><strong>Comparación:</strong> <code>==</code> y <code>!=</code> evalúan contenido (función <code>equals()</code>). <code>===</code> evalúa identidad de memoria.</li>
                         </ul>
+
+                        <h4 style="margin-top: 1.5rem;">Null Safety (El fin de la NullPointerException)</h4>
+                        <p>Una de las características más aclamadas del lenguaje es su sistema de tipos diseñado para erradicar errores de nulos. El sistema distingue explícitamente entre referencias seguras y anulables:</p>
+                        <ul class="ide-list">
+                            <li>Un tipo regular (ej. <code>String</code>) <strong>no puede</strong> ser nulo por defecto.</li>
+                            <li>Para permitir nulos, se declara como "anulable" añadiendo <code>?</code> (ej. <code>String?</code>).</li>
+                        </ul>
+                        <pre><code><span class="keyword">var</span> <span class="variable">textoNulo</span>: <span class="type">String?</span> = <span class="keyword">null</span> <span class="comment">// Válido por el '?'</span>
+
+<span class="comment">// Operadores de Seguridad contra Nulos:</span>
+<span class="keyword">val</span> <span class="variable">longitud</span> = <span class="variable">textoNulo</span>?.length ?: <span class="number">0</span> <span class="comment">// Llamada segura (?.) y Operador Elvis (?:)</span></code></pre>
                     </div>
 
                     <div id="declaracion" class="tab-pane">
                         <h4>Inferencia de Tipos y Mutabilidad</h4>
-                        <p>Kotlin utiliza un potente algoritmo de <strong>inferencia de tipos</strong> que permite omitir el tipo de dato si este puede ser deducido de la expresión asignada. El lenguaje exige distinguir estrictamente entre referencias de solo lectura y mutables:</p>
+                        <p>Kotlin utiliza inferencia de tipos, permitiendo omitir el tipo si se deduce de la expresión asignada. Exige distinguir entre:</p>
                         <ul class="ide-list">
-                            <li><strong>val (Value):</strong> Crea una referencia inmutable. Equivale a <code>final</code> en Java. Una vez inicializada, la referencia no puede apuntar a otro valor. Fomenta la programación segura y funcional.</li>
-                            <li><strong>var (Variable):</strong> Crea una referencia mutable que puede reasignarse múltiples veces a otros valores del mismo tipo.</li>
+                            <li><strong>val (Value):</strong> Referencia inmutable (como <code>final</code> en Java). Fomenta código seguro.</li>
+                            <li><strong>var (Variable):</strong> Referencia mutable que puede reasignarse.</li>
                         </ul>
-                        <p>La sintaxis formal de asignación es: <code>val/var &lt;nombre&gt;[: &lt;Tipo&gt;] = &lt;expresión&gt;</code></p>
-                        <br>
-                        <pre><code><span class="comment">// Inferencia automática (El compilador sabe que es String)</span>
-<span class="keyword">val</span> <span class="variable">lenguaje</span> = <span class="string">"Kotlin"</span>
-<span class="comment">// lenguaje = "Java" // ERROR: 'val' no puede ser reasignado</span>
 
-<span class="comment">// Declaración explícita con mutabilidad</span>
-<span class="keyword">var</span> <span class="variable">version</span>: <span class="type">Double</span> = <span class="number">1.9</span>
-<span class="variable">version</span> = <span class="number">2.0</span> <span class="comment">// CORRECTO: 'var' permite reasignación</span></code></pre>
+                        <h4 style="margin-top: 1.5rem;">Type Checks y Smart Casts (Casteo Automático)</h4>
+                        <p>Se utiliza el operador <code>is</code> para comprobar el tipo de un objeto en tiempo de ejecución. Si la verificación es exitosa, el compilador realiza un <strong>Smart Cast</strong>, convirtiendo la variable al tipo objetivo automáticamente.</p>
+                        <pre><code><span class="keyword">fun</span> <span class="variable">imprimirLongitud</span>(<span class="variable">obj</span>: <span class="type">Any</span>) {
+    <span class="keyword">if</span> (<span class="variable">obj</span> <span class="keyword">is</span> <span class="type">String</span>) {
+        println(<span class="variable">obj</span>.length) <span class="comment">// 'obj' ya es tratado como String (Smart Cast)</span>
+    }
+}</code></pre>
+
+                        <h4 style="margin-top: 1.5rem;">Funciones Lambda y Closures</h4>
+                        <p>Las expresiones lambda son funciones anónimas que pueden ser tratadas como valores (asignadas a variables o pasadas como parámetros). Tienen una sintaxis concisa entre llaves <code>{}</code>. Si la lambda tiene un solo parámetro, se puede omitir su declaración y usar la palabra clave implícita <code>it</code>.</p>
+                        <p><strong>Closures:</strong> Una lambda en Kotlin puede acceder a su <em>closure</em>, es decir, a las variables declaradas en el ámbito exterior. A diferencia de Java (donde deben ser finales), en Kotlin las lambdas pueden <strong>modificar</strong> las variables capturadas.</p>
+                        <pre><code><span class="keyword">var</span> <span class="variable">suma</span> = <span class="number">0</span>
+<span class="keyword">val</span> <span class="variable">numeros</span> = listOf(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)
+
+<span class="comment">// Lambda capturando y modificando una variable exterior (closure)</span>
+<span class="variable">numeros</span>.forEach { <span class="variable">numero</span> ->
+    <span class="variable">suma</span> += <span class="variable">numero</span>
+}
+
+<span class="comment">// Sintaxis simplificada con el parámetro implícito 'it'</span>
+<span class="keyword">val</span> <span class="variable">dobles</span> = <span class="variable">numeros</span>.map { <span class="variable">it</span> * <span class="number">2</span> }</code></pre>
+                    </div>
+
+                    <div id="flujo" class="tab-pane">
+                        <h4>Expresiones Condicionales (if y when)</h4>
+                        <p>En Kotlin, <code>if</code> y <code>when</code> son <strong>expresiones</strong> (devuelven un valor). Esto elimina la necesidad del operador ternario convencional.</p>
+                        <pre><code><span class="comment">// Uso tradicional y con bloque else</span>
+<span class="keyword">var</span> <span class="variable">max</span> = <span class="number">a</span>
+<span class="keyword">if</span> (<span class="number">a</span> &lt; <span class="number">b</span>) <span class="variable">max</span> = <span class="number">b</span>
+
+<span class="keyword">var</span> <span class="variable">max2</span>: <span class="type">Int</span>
+<span class="keyword">if</span> (<span class="number">a</span> > <span class="number">b</span>) {
+    <span class="variable">max2</span> = <span class="number">a</span>
+} <span class="keyword">else</span> {
+    <span class="variable">max2</span> = <span class="number">b</span>
+}
+
+<span class="comment">// if como expresión (asignación directa)</span>
+<span class="keyword">val</span> <span class="variable">maximo</span> = <span class="keyword">if</span> (<span class="number">a</span> > <span class="number">b</span>) <span class="number">a</span> <span class="keyword">else</span> <span class="number">b</span></code></pre>
+
+                        <p>La estructura <code>when</code> reemplaza al clásico <code>switch</code>. Es increíblemente flexible y permite evaluar valores exactos, tipos, o rangos enteros mediante la palabra clave <code>in</code> o <code>!in</code>.</p>
+                        <pre><code><span class="keyword">val</span> <span class="variable">x</span> = <span class="number">25</span>
+<span class="keyword">when</span> (<span class="variable">x</span>) {
+    <span class="number">1</span> -> print(<span class="string">"x es igual a 1"</span>)
+    <span class="keyword">in</span> <span class="number">10</span>..<span class="number">20</span> -> print(<span class="string">"x está en el rango 10-20"</span>)
+    !<span class="keyword">in</span> <span class="number">21</span>..<span class="number">30</span> -> print(<span class="string">"x NO está en el rango 21-30"</span>)
+    <span class="keyword">else</span> -> print(<span class="string">"Ninguna de las condiciones anteriores"</span>)
+}</code></pre>
+
+                        <h4 style="margin-top: 1.5rem;">Estructuras de Iteración</h4>
+                        <p>El bucle <code>for</code> puede iterar sobre cualquier cosa que proporcione un iterador, como arreglos, colecciones o rangos dinámicos. Por su parte, <code>while</code> y <code>do-while</code> funcionan de forma tradicional, garantizando <code>do-while</code> al menos una ejecución.</p>
+                        <pre><code><span class="comment">// Bucle for con rangos, pasos descendentes y arreglos</span>
+<span class="keyword">for</span> (<span class="variable">i</span> <span class="keyword">in</span> <span class="number">1</span>..<span class="number">3</span>) print(<span class="variable">i</span>) <span class="comment">// Imprime: 123</span>
+<span class="keyword">for</span> (<span class="variable">i</span> <span class="keyword">in</span> <span class="number">6</span> downTo <span class="number">0</span> step <span class="number">2</span>) print(<span class="variable">i</span>) <span class="comment">// Imprime: 6420</span>
+
+<span class="keyword">val</span> <span class="variable">frutas</span> = arrayOf(<span class="string">"manzana"</span>, <span class="string">"kiwi"</span>, <span class="string">"cereza"</span>)
+<span class="keyword">for</span> (<span class="variable">fruta</span> <span class="keyword">in</span> <span class="variable">frutas</span>) { println(<span class="variable">fruta</span>) }
+
+<span class="comment">// Bucle while</span>
+<span class="keyword">var</span> <span class="variable">contador</span> = <span class="number">5</span>
+<span class="keyword">while</span> (<span class="variable">contador</span> > <span class="number">0</span>) {
+    <span class="variable">contador</span>--
+}
+
+<span class="comment">// Bucle do-while (Las variables declaradas en el bloque do, son visibles en el while)</span>
+<span class="keyword">do</span> {
+    <span class="keyword">val</span> <span class="variable">y</span> = recuperarDatos()
+} <span class="keyword">while</span> (<span class="variable">y</span> != <span class="keyword">null</span>)</code></pre>
                     </div>
 
                     <div id="usuario" class="tab-pane">
                         <h4>Clases, Data Classes e Instanciación</h4>
-                        <p>Kotlin simplifica la definición de tipos por el usuario reduciendo el código repetitivo drásticamente. Por defecto, todas las clases son finales (no se pueden heredar) a menos que se marquen con la palabra <code>open</code>.</p>
+                        <p>Kotlin simplifica la definición de tipos reduciendo el código repetitivo drásticamente. Por defecto, todas las clases son finales (no heredables) a menos que se marquen con <code>open</code>.</p>
                         <ul class="ide-list">
-                            <li><strong>Clases Estándar:</strong> Definidas con <code>class</code>, permiten declarar el constructor primario directamente en el encabezado de la clase.</li>
-                            <li><strong>Data Classes:</strong> Marcadas con <code>data class</code>. Si sus propiedades se definen en el constructor principal, el compilador autogenera métodos vitales como <code>equals()</code>, <code>hashCode()</code>, <code>toString()</code> y <code>copy()</code>.</li>
+                            <li><strong>Clases Estándar:</strong> Definidas con <code>class</code>, permiten declarar el constructor primario directamente en el encabezado.</li>
+                            <li><strong>Data Classes:</strong> Marcadas con <code>data class</code>. El compilador autogenera métodos vitales como <code>equals()</code>, <code>hashCode()</code>, <code>toString()</code> y <code>copy()</code>.</li>
                         </ul>
                         <p><strong>Instanciación:</strong> Una de las reglas gramaticales más distintivas frente a otros lenguajes es la <strong>ausencia de la palabra <code>new</code></strong>. Para instanciar un objeto, simplemente se invoca al constructor como si fuera una función normal.</p>
                         <pre><code><span class="comment">// Definición concisa de una Data Class</span>
