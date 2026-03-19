@@ -377,45 +377,73 @@
 
             <div class="ide-container reveal delay-1">
                 <div class="ide-sidebar">
-                    <button class="tab-btn active" data-target="identificadores">Identificadores</button>
-                    <button class="tab-btn" data-target="primitivos">Tipos Primitivos</button>
-                    <button class="tab-btn" data-target="declaracion">Asignación y Declaración</button>
-                    <button class="tab-btn" data-target="usuario">Tipos de Usuario</button>
+                    <button class="tab-btn active" data-target="identificadores">Reglas para identificadores</button>
+                    <button class="tab-btn" data-target="primitivos">Tipos de datos primitivos</button>
+                    <button class="tab-btn" data-target="declaracion">Declaración, definición y asignación</button>
+                    <button class="tab-btn" data-target="usuario">Tipos definidos por el usuario</button>
                 </div>
 
                 <div class="ide-content">
                     <div id="identificadores" class="tab-pane active">
-                        <h4>Reglas para Identificadores</h4>
-                        <p>Los identificadores en Kotlin son nombres para variables, funciones y clases. Siguen la convención <strong>camelCase</strong>, son sensibles a mayúsculas y no pueden comenzar con números ni usar palabras reservadas del lenguaje.</p>
-                        <pre><code><span class="keyword">val</span> <span class="variable">nombreUsuario</span> = <span class="string">"Diego"</span>
-<span class="comment">// Los identificadores deben ser camelCase</span></code></pre>
+                        <h4>Reglas para Identificadores y Sintaxis</h4>
+                        <p>Según la gramática léxica de Kotlin, los identificadores pueden contener letras, dígitos y guiones bajos (<code>_</code>), pero tienen la restricción estricta de <strong>no comenzar con un dígito</strong>. El lenguaje es estrictamente <em>case-sensitive</em> y los puntos y coma (<code>;</code>) son opcionales, ya que el compilador infiere el final de la instrucción por el salto de línea.</p>
+                        <p>La especificación divide las palabras clave en dos categorías:</p>
+                        <ul class="ide-list">
+                            <li><strong>Hard Keywords:</strong> Palabras como <code>class</code>, <code>val</code> o <code>fun</code> que nunca pueden usarse como nombres.</li>
+                            <li><strong>Soft Keywords:</strong> Palabras como <code>import</code> o <code>catch</code> que pueden actuar como identificadores en ciertos contextos.</li>
+                        </ul>
+                        <p>Para garantizar la interoperabilidad (por ejemplo, al llamar a un método de Java que usa una palabra reservada), Kotlin permite el uso de <strong>identificadores escapados</strong> mediante <em>backticks</em>:</p>
+                        <pre><code><span class="keyword">val</span> <span class="variable">`when`</span> = <span class="string">"Ahora"</span> <span class="comment">// Válido gracias a las comillas invertidas</span></code></pre>
                     </div>
 
                     <div id="primitivos" class="tab-pane">
-                        <h4>Tipos de Datos "Primitivos"</h4>
-                        <p>A diferencia de Java, en Kotlin <strong>todo es un objeto</strong> desde la perspectiva del desarrollador. Sin embargo, el compilador optimiza estos tipos (como <code>Int</code>, <code>Double</code>, <code>Boolean</code>) a tipos primitivos de la JVM siempre que sea posible para maximizar el rendimiento.</p>
-                        <pre><code><span class="keyword">val</span> <span class="variable">edad</span>: <span class="type">Int</span> = <span class="number">20</span>
-<span class="keyword">val</span> <span class="variable">pi</span>: <span class="type">Double</span> = <span class="number">3.14159</span>
-<span class="keyword">val</span> <span class="variable">esActivo</span>: <span class="type">Boolean</span> = <span class="keyword">true</span></code></pre>
+                        <h4>Sistema de Tipos Unificado y Operadores</h4>
+                        <p>El sistema de tipos de Kotlin tiene como raíz a <code>Any?</code>, estableciendo que <strong>todo es un objeto</strong>. A diferencia de Java, no existen tipos primitivos separados gramaticalmente. Sin embargo, para mantener un rendimiento óptimo, el compilador realiza una optimización profunda:</p>
+                        <ul class="ide-list">
+                            <li>Los tipos no anulables (como <code>Int</code> o <code>Boolean</code>) se mapean directamente a primitivos de la JVM (<code>int</code>, <code>boolean</code>).</li>
+                            <li>Si el tipo es anulable (<code>Int?</code>) o se usa en genéricos, el compilador realiza un <em>boxing</em> y lo trata como un objeto real en memoria.</li>
+                        </ul>
+                        <p><strong>Operadores Frecuentes:</strong> En Kotlin, los operadores son llamadas a funciones bajo el capó (sobrecarga de operadores):</p>
+                        <ul class="ide-list">
+                            <li><strong>Aritméticos:</strong> <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code></li>
+                            <li><strong>Comparación Estructural:</strong> <code>==</code> y <code>!=</code> (se traducen a la función <code>equals()</code>). Para comprobar identidad de memoria exacta se usa <code>===</code>.</li>
+                            <li><strong>Seguridad contra Nulos:</strong> <code>?.</code> (Llamada segura que evita NullPointerException), <code>?:</code> (Operador Elvis para valores por defecto), <code>!!</code> (Aserción de no nulidad).</li>
+                        </ul>
                     </div>
 
                     <div id="declaracion" class="tab-pane">
-                        <h4>Asignación y Declaración</h4>
-                        <p>Kotlin utiliza <code>val</code> para variables de solo lectura (inmutables) y <code>var</code> para variables mutables. Posee un potente sistema de <strong>inferencia de tipos</strong> que permite omitir la declaración explícita del tipo si el compilador puede deducirlo del valor inicial.</p>
-                        <pre><code><span class="comment">// Variable inmutable (Constante)</span>
-<span class="keyword">val</span> <span class="variable">universidad</span> = <span class="string">"UADY"</span>
+                        <h4>Inferencia de Tipos y Mutabilidad</h4>
+                        <p>Kotlin utiliza un potente algoritmo de <strong>inferencia de tipos</strong> que permite omitir el tipo de dato si este puede ser deducido de la expresión asignada. El lenguaje exige distinguir estrictamente entre referencias de solo lectura y mutables:</p>
+                        <ul class="ide-list">
+                            <li><strong>val (Value):</strong> Crea una referencia inmutable. Equivale a <code>final</code> en Java. Una vez inicializada, la referencia no puede apuntar a otro valor. Fomenta la programación segura y funcional.</li>
+                            <li><strong>var (Variable):</strong> Crea una referencia mutable que puede reasignarse múltiples veces a otros valores del mismo tipo.</li>
+                        </ul>
+                        <p>La sintaxis formal de asignación es: <code>val/var &lt;nombre&gt;[: &lt;Tipo&gt;] = &lt;expresión&gt;</code></p>
+                        <br>
+                        <pre><code><span class="comment">// Inferencia automática (El compilador sabe que es String)</span>
+<span class="keyword">val</span> <span class="variable">lenguaje</span> = <span class="string">"Kotlin"</span>
+<span class="comment">// lenguaje = "Java" // ERROR: 'val' no puede ser reasignado</span>
 
-<span class="comment">// Variable mutable</span>
-<span class="keyword">var</span> <span class="variable">semestre</span> = <span class="number">4</span>
-<span class="variable">semestre</span> = <span class="number">5</span> <span class="comment">// Esto es válido</span></code></pre>
+<span class="comment">// Declaración explícita con mutabilidad</span>
+<span class="keyword">var</span> <span class="variable">version</span>: <span class="type">Double</span> = <span class="number">1.9</span>
+<span class="variable">version</span> = <span class="number">2.0</span> <span class="comment">// CORRECTO: 'var' permite reasignación</span></code></pre>
                     </div>
 
                     <div id="usuario" class="tab-pane">
-                        <h4>Tipos definidos por el usuario</h4>
-                        <p>Los desarrolladores pueden crear sus propios tipos mediante <strong>clases</strong> y <strong>Data Classes</strong>. Estas últimas son ideales para modelar datos, ya que el compilador genera automáticamente métodos útiles como <code>equals()</code>, <code>hashCode()</code> y <code>toString()</code>.</p>
-                        <pre><code><span class="keyword">data class</span> <span class="type">Estudiante</span>(<span class="keyword">val</span> nombre: <span class="type">String</span>, <span class="keyword">var</span> calificacion: <span class="type">Int</span>)
+                        <h4>Clases, Data Classes e Instanciación</h4>
+                        <p>Kotlin simplifica la definición de tipos por el usuario reduciendo el código repetitivo drásticamente. Por defecto, todas las clases son finales (no se pueden heredar) a menos que se marquen con la palabra <code>open</code>.</p>
+                        <ul class="ide-list">
+                            <li><strong>Clases Estándar:</strong> Definidas con <code>class</code>, permiten declarar el constructor primario directamente en el encabezado de la clase.</li>
+                            <li><strong>Data Classes:</strong> Marcadas con <code>data class</code>. Si sus propiedades se definen en el constructor principal, el compilador autogenera métodos vitales como <code>equals()</code>, <code>hashCode()</code>, <code>toString()</code> y <code>copy()</code>.</li>
+                        </ul>
+                        <p><strong>Instanciación:</strong> Una de las reglas gramaticales más distintivas frente a otros lenguajes es la <strong>ausencia de la palabra <code>new</code></strong>. Para instanciar un objeto, simplemente se invoca al constructor como si fuera una función normal.</p>
+                        <pre><code><span class="comment">// Definición concisa de una Data Class</span>
+<span class="keyword">data class</span> <span class="type">Desarrollador</span>(<span class="keyword">val</span> <span class="variable">nombre</span>: <span class="type">String</span>, <span class="keyword">var</span> <span class="variable">experiencia</span>: <span class="type">Int</span>)
 
-<span class="keyword">val</span> <span class="variable">alumno1</span> = <span class="type">Estudiante</span>(<span class="string">"Agustín"</span>, <span class="number">100</span>)</code></pre>
+<span class="comment">// Instanciación directa (Sin la palabra 'new')</span>
+<span class="keyword">val</span> <span class="variable">dev</span> = <span class="type">Desarrollador</span>(<span class="string">"Ada"</span>, <span class="number">5</span>)
+
+<span class="variable">dev.experiencia</span> = <span class="number">6</span> <span class="comment">// Modificación de la propiedad 'var'</span></code></pre>
                     </div>
                 </div>
             </div>
